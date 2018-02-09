@@ -2,7 +2,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {FormsModule} from "@angular/forms";
-import {NgxElectronModule} from "ngx-electron";
 import {RouterModule} from "@angular/router";
 import {MainViewComponent} from "./main-view.component";
 import {

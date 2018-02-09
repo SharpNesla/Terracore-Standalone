@@ -4,7 +4,6 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {FormsModule} from "@angular/forms";
-import {NgxElectronModule} from "ngx-electron";
 import {RouterModule, Routes} from "@angular/router";
 import {MainViewModule} from "./main-editor/main-view.module";
 import {PathLocationStrategy} from "@angular/common";
@@ -21,7 +20,7 @@ const routes: Routes = [
     AppComponent
   ],
   imports: [
-    BrowserModule, FormsModule, NgxElectronModule, MaterialElementsModule,
+    BrowserModule, FormsModule, MaterialElementsModule,
     MainViewModule, RouterModule.forRoot(routes)
   ],
   providers: [],
