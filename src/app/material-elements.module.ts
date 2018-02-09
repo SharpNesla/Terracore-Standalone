@@ -10,9 +10,10 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
   imports: [
     CommonModule, MatTabsModule, MatCardModule,
     MatListModule, MatIconModule, MatDividerModule, MatButtonModule, MatToolbarModule, BrowserAnimationsModule,
+    MatIconModule
   ],
   exports: [MatTabsModule, MatCardModule,
-    MatListModule, MatIconModule, MatDividerModule, MatButtonModule,  MatToolbarModule, BrowserAnimationsModule,],
+    MatListModule, MatIconModule, MatDividerModule, MatButtonModule,  MatToolbarModule, BrowserAnimationsModule, MatIconModule],
   declarations: []
 })
 export class MaterialElementsModule {

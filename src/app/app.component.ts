@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+// @ts-ignore
 
 @Component({
   selector: 'app-root',
@@ -8,5 +9,7 @@ import {Component} from '@angular/core';
   `
 })
 export class AppComponent {
-  constructor(){}
+  constructor(){
+    nw.Window.get().showDevTools()
+  }
 }
