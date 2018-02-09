@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  template: ``
+  template: `
+    <mat-toolbar color="primary">Terracore</mat-toolbar>
+    <router-outlet></router-outlet>
+  `
 })
 export class AppComponent {
-
+  constructor(){}
 }

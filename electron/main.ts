@@ -8,9 +8,12 @@ function onReady() {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
+
     webPreferences:{
+      sandbox: true,
       webSecurity: false,
-    }
+    },
+
   });
 
   const fileName = `file://${__dirname}/index.html`;

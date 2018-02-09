@@ -5,14 +5,24 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {FormsModule} from "@angular/forms";
 import {NgxElectronModule} from "ngx-electron";
-import {RouterModule} from "@angular/router";
+import {RouterModule, Routes} from "@angular/router";
+import {MainViewModule} from "./main-editor/main-view.module";
+import {PathLocationStrategy} from "@angular/common";
+import {MainViewComponent} from "./main-editor/main-view.component";
+import {MaterialElementsModule} from "./material-elements.module";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+
+const routes: Routes = [
+  {path: '', component: MainViewComponent}
+]
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule, FormsModule, NgxElectronModule
+    BrowserModule, FormsModule, NgxElectronModule, MaterialElementsModule,
+    MainViewModule, RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]
