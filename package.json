@@ -2,11 +2,12 @@
   "name": "ngelectron-boiler-plate",
   "version": "0.0.0",
   "license": "MIT",
-  "main": "./dist/index.html",
+  "main": "./dist/assets/unity/index.html",
   "scripts": {
     "package": "build --tasks mac-x64 .",
     "start": "nw .",
     "build": "ng build --prod --aot",
+    "devbuild": "ng build dist",
     "watch": "ng build dist -w"
   },
   "private": true,
@@ -28,8 +29,10 @@
     "@angular/platform-browser-dynamic": "^5.0.0",
     "@angular/router": "^5.0.0",
     "@types/node": "~6.0.60",
+    "@types/nw.gui": "0.0.20",
     "codelyzer": "^4.0.1",
     "core-js": "^2.4.1",
+    "d3-node-editor": "^0.6.8",
     "nwjs-builder-phoenix": "^1.14.6",
     "rxjs": "^5.5.2",
     "ts-node": "~3.2.0",
@@ -39,10 +42,9 @@
   "build": {
     "output": "./build",
     "nwVersion": "latest",
-    "excludes": [
-      "src",
-      "tsconfig.json",
-      "webpack.config.json"
+    "files": [
+      "./dist/**",
+      "package.json"
     ]
   }
 }

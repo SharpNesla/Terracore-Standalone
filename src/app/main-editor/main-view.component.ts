@@ -17,6 +17,7 @@ import {Component} from '@angular/core';
         </mat-tab>
       </mat-tab-group>
       <mat-divider></mat-divider>
+      <app-editor></app-editor>
     </div>`,
   styles: [`button {
       margin: 8px;

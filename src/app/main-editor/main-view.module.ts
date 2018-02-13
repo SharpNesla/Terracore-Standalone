@@ -10,10 +10,11 @@ import {
   MatToolbarModule
 } from "@angular/material";
 import {MaterialElementsModule} from "../material-elements.module";
+import {EditorComponent} from "./editor.component";
 
 @NgModule({
   declarations: [
-    MainViewComponent
+    MainViewComponent, EditorComponent
   ],
   imports: [
     BrowserModule, FormsModule, MaterialElementsModule
