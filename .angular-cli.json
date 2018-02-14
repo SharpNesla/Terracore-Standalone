@@ -10,7 +10,8 @@
       "outDir": "dist",
       "assets": [
         "assets",
-        "favicon.ico"
+        "favicon.ico",
+        { "glob": "Build", "input": "./unity", "output": "./" }
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -21,9 +22,26 @@
         "styles.scss"
       ],
       "scripts": [
-        {"input": "../node_modules/d3-node-editor/build/d3-node-editor.js","output":"D3NE"},
-        {"input": "../node_modules/d3/build/d3.min.js","output":"d3"},
-        {"input": "../node_modules/alight/alight.js","output":"alight"}
+        {
+          "input": "../node_modules/d3-node-editor/build/d3-node-editor.js",
+          "output": "D3NE"
+        },
+        {
+          "input": "../node_modules/d3/build/d3.min.js",
+          "output": "d3"
+        },
+        {
+          "input": "../node_modules/alight/alight.js",
+          "output": "alight"
+        },
+        {
+          "input": "../src/unity/TemplateData/UnityProgress.js",
+          "output": "unity/TemplateData/UnityProgress"
+        },
+        {
+          "input": "../src/unity/Build/UnityLoader.js",
+          "output": "unity/Build/UnityLoader"
+        }
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

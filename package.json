@@ -1,8 +1,8 @@
 {
-  "name": "ngelectron-boiler-plate",
+  "name": "terracore",
   "version": "0.0.0",
   "license": "MIT",
-  "main": "./dist/assets/unity/index.html",
+  "main": "./dist/index.html",
   "scripts": {
     "package": "build --tasks mac-x64 .",
     "start": "nw .",
@@ -33,6 +33,7 @@
     "codelyzer": "^4.0.1",
     "core-js": "^2.4.1",
     "d3-node-editor": "^0.6.8",
+    "libnoise": "^0.2.1",
     "nwjs-builder-phoenix": "^1.14.6",
     "rxjs": "^5.5.2",
     "ts-node": "~3.2.0",
@@ -46,5 +47,12 @@
       "./dist/**",
       "package.json"
     ]
+  },
+  "window":{
+    "min_width": 570,
+    "min_height": 525,
+    "position": "mouse",
+    "width": 1200,
+    "height": 700
   }
 }

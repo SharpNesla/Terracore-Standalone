@@ -11,16 +11,15 @@ import {
 } from "@angular/material";
 import {MaterialElementsModule} from "../material-elements.module";
 import {EditorComponent} from "./editor.component";
+import {ModelModule} from "../model/model.module";
+import {UnityComponent} from "./unity.component";
 
 @NgModule({
   declarations: [
-    MainViewComponent, EditorComponent
+    MainViewComponent, EditorComponent, UnityComponent
   ],
   imports: [
-    BrowserModule, FormsModule, MaterialElementsModule
-  ],
-  exports:[
-
+    BrowserModule, FormsModule, MaterialElementsModule, ModelModule
   ],
   providers: []
 })
