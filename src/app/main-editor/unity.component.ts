@@ -4,19 +4,24 @@ import {AfterViewInit, Component} from '@angular/core';
   selector: 'app-editor-unity',
   template: `
     <div class="webgl-content">
-      <div id="gameContainer" style="width: 100%; height: 450px">
-      </div>
-      <button mat-fab color="accent" (click)="this.GameInstance.SetFullscreen(1)">
-        <mat-icon>settings_overscan
-        </mat-icon>
-      </button>
+      <div id="gameContainer">
+    </div>
+    <button mat-fab color="accent" (click)="this.GameInstance.SetFullscreen(1)">
+      <mat-icon>settings_overscan
+      </mat-icon>
+    </button>
     </div>`,
   styles: [`
-    button{
-        position: absolute;
-        left: 370px;
-        top: 430px;
-    }
+      button {
+          position: absolute;
+          left: 370px;
+          top: 430px;
+      }
+
+      #gameContainer {
+          width: 100%;
+          height: 450px;
+      }
   `]
 })
 export class UnityComponent implements AfterViewInit {
