@@ -1,26 +1,76 @@
 @import '~@angular/material/theming';
+@import '../../themes/dark.scss';
 
 .wrapper {
   width: 100%;
-}
-
-.socket {
-
+  height: 600px;
 }
 
 .node-editor:focus {
   outline: 0;
 }
 
+$grid-size: 20px;
+$grid-color: #363636;
 .node-editor {
+  background-size: $grid-size $grid-size;
+  background-image: linear-gradient(to right, $grid-color 1px, transparent 1px), linear-gradient(to bottom, $grid-color 1px, transparent 1px);
+  background-color: darken($grid-color, 6%);
   .node {
+    cursor: pointer;
+    background-color: #404040;
     border: 0;
-    border-radius: 0;
-    color: black;
+    border-radius: 8px;
+
     @include mat-elevation(4);
-    @include mat-elevation-transition()
+    @include mat-elevation-transition();
+
+    &:hover {
+      background-color: #404040;
+    }
+    .title {
+      padding: 16px;
+      @include mat-elevation(4);
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+    .socket {
+      margin-right: -12px;
+      border: 0;
+      background-color: #34a04d;
+      @include mat-elevation(6);
+      @include mat-elevation-transition();
+      &:hover {
+        @include mat-elevation(16);
+      }
+    }
+    .socket.input {
+      margin-right: 12px;
+    }
+
   }
-  .node.selected{
-    @include mat-elevation(8)
+  .node.selected {
+    @include mat-elevation(16);
+    background-color: #404040;
   }
+
+  .const, .node {
+    .title {
+      background-color: #34a04d;
+    }
+  }
+
+  .connections {
+    .connection {
+      stroke-width: 4px;
+      stroke: #ffffff;
+      pointer-events: none;
+      position: absolute;
+      overflow: visible;
+      &.selected{
+        stroke: #ffffff;
+      }
+    }
+  }
+
 }

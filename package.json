@@ -36,6 +36,7 @@
     "libnoise": "^0.2.1",
     "nwjs-builder-phoenix": "^1.14.6",
     "rxjs": "^5.5.2",
+    "threads": "^0.10.1",
     "ts-node": "~3.2.0",
     "typescript": "~2.4.2",
     "zone.js": "^0.8.14"
@@ -48,7 +49,7 @@
       "package.json"
     ]
   },
-  "window":{
+  "window": {
     "min_width": 570,
     "min_height": 525,
     "position": "mouse",

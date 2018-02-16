@@ -78,4 +78,4 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
-src/unity
+/src/unity

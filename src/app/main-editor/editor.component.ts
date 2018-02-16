@@ -10,10 +10,7 @@ import {NodeEditorService} from "../model/node-editor.service";
   template: `
     <div class="wrapper">
       <div #d3neEditor class="node-editor"></div>
-    </div>
-    <button matTooltip="Compile" (click)="this.nodeEditor.compile()" mat-fab color="accent">
-      <mat-icon>code</mat-icon>
-    </button> `,
+    </div>`,
   styleUrls: ['../../../node_modules/d3-node-editor/build/d3-node-editor.css', './d3ne.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
