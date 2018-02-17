@@ -46,7 +46,10 @@ import {AllComponents} from "../model/nodes/components";
       <mat-drawer-content>
         <mat-tab-group class="mat-elevation-z4">
           <mat-tab *ngFor="let components of this.AllComponents" [label]="components.title">
-            <button mat-raised-button color="accent" *ngFor="let input of components.components">{{input.Title}}</button>
+            <button mat-raised-button color="accent"
+                    *ngFor="let input of components.components" (click)="this.nodeEditor.addElement(input)">
+              {{input.Title}}
+            </button>
           </mat-tab>
         </mat-tab-group>
         
@@ -70,8 +73,18 @@ import {AllComponents} from "../model/nodes/components";
 
       mat-drawer-container {
           height: calc(100% - 64px);
+          
       }
-
+      mat-drawer-content{
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+          justify-content: stretch;
+      }
+      mat-tab-group{
+          flex-shrink: 0;
+      }
       mat-card {
           margin: 4px;
       }
@@ -88,9 +101,6 @@ import {AllComponents} from "../model/nodes/components";
   `]
 })
 export class MainViewComponent {
-  Outputs = ['Height Map', 'Biome Map'];
-  Inputs = ['Simple Height', 'Height Map', 'Billow Noise'];
-  Transforms = ['Multiply', 'Add'];
   AllComponents = AllComponents;
   constructor(public nodeEditor: NodeEditorService){
 

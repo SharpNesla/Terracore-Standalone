@@ -9,7 +9,6 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
   constructor() {
-    nw.Window.get().showDevTools()
-
+    nw.Window.get().showDevTools();
   }
 }

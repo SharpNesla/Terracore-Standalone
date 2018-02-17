@@ -18,7 +18,7 @@ public class ExampleClass : MonoBehaviour
         GUILayout.BeginVertical();
         // Release cursor on escape keypress
         if (Input.GetKeyDown(KeyCode.Escape))
-            Cursor.lockState = wantedMode = CursorLockMode.None;
+            Cursor.lockState = wantedMode = CursorLockMode.None;    
         switch (Cursor.lockState)
         {
             case CursorLockMode.None:

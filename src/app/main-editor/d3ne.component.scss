@@ -3,7 +3,7 @@
 
 .wrapper {
   width: 100%;
-  height: 600px;
+  height: 100%;
 }
 
 .node-editor:focus {
@@ -54,9 +54,34 @@ $grid-color: #363636;
     background-color: #404040;
   }
 
-  .const, .node {
+  .group{
+    background-color: rgba(0, 136, 225,0.2);
+    &.selected{
+      border-color: #FFCA28;
+    }
+  }
+
+  .const, .noise, .grayscale, .random {
     .title {
       background-color: #34a04d;
+    }
+  }
+
+  .add, .subtract, .power, .multiply, .divide{
+    .title {
+      background-color: #75909b;
+    }
+  }
+
+  .slope{
+    .title {
+      background-color: #0088e1;
+    }
+  }
+
+  .heightmap, .splatmap, .detailmap, .objectmap{
+    .title{
+      background-color: #f33f79;
     }
   }
 

@@ -5,6 +5,7 @@ import {AddComponent} from "./nodes/math-components";
 import {UnityService} from "./unity.service";
 import {AllComponents, AllComponentsFlat} from "./nodes/components";
 import {ParallelizatorService} from "./parallelizator.service";
+import {Core} from "./core";
 
 @Injectable()
 export class NodeEditorService {
@@ -14,7 +15,7 @@ export class NodeEditorService {
 
   }
 
-  public refresh(container: ElementRef) {
+  refresh(container: ElementRef) {
     const menu = new D3NE.ContextMenu({
       Add: AddComponent,
       Const: ConstComponent
@@ -23,16 +24,20 @@ export class NodeEditorService {
     this.editor = new D3NE.NodeEditor('terracore@0.0.0', container.nativeElement,
       AllComponentsFlat, menu);
 
-    const nn = ConstComponent.newNode();
-    const node = ConstComponent.builder(nn);
 
+  }
+
+  addElement(component){
+    const nn = component.newNode();
+    const node = component.builder(nn);
+    nn.position[0] = Math.random() * 300;
+    nn.position[1] = Math.random() * 300;
     this.editor.addNode(node);
-    this.editor.view.zoomAt([node]);
+    //this.editor.view.zoomAt([node]);
   }
 
   compile(){
-    const engine = new D3NE.Engine('terracore@0.0.0',[ConstComponent, AddComponent] );
-    engine.process(this.editor.toJSON(),null);
-    this.unityService.Compile();
+    const engine = new Core();
+    engine.getCell(this.editor.toJSON())
   }
 }

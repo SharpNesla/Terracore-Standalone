@@ -42,7 +42,6 @@ namespace Assets.SimpleGenerator
 
         public void Refresh()
         {
-
             _noiseGenerator = new Billow{Frequency = Frequency,OctaveCount = Octaves, Seed = 34};
             _hillModulator = new Perlin{Frequency = HillModulatorFrequency, OctaveCount = 12};
             WaterLevelOSC = new Const(hillHeight);
