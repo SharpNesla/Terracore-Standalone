@@ -6,6 +6,7 @@ import {AllComponents} from "../model/nodes/components";
 @Component({
   selector: 'app-main-view',
   template: `
+
     <mat-drawer-container class="example-container">
       <mat-drawer class="mat-elevation-z4" mode="side" opened="true">
         <app-editor-unity>
@@ -48,61 +49,74 @@ import {AllComponents} from "../model/nodes/components";
           <mat-tab *ngFor="let components of this.AllComponents" [label]="components.title">
             <button mat-raised-button color="accent"
                     *ngFor="let input of components.components" (click)="this.nodeEditor.addElement(input)">
-              {{input.Title}}
+              {{input.name}}
             </button>
           </mat-tab>
         </mat-tab-group>
-        
         <button matTooltip="Compile" id="compile" (click)="this.nodeEditor.compile()" mat-fab color="accent">
           <mat-icon>code</mat-icon>
         </button>
         <app-editor></app-editor>
       </mat-drawer-content>
     </mat-drawer-container>
-    `,
+  `,
+  //language=SCSS
   styles: [`
-      mat-drawer {
-          width: 450px;
-          padding: 16px;
-      }
-      
-      app-editor {
-          width: 100%;
-          height: 100%;
-      }
+    button{
+      z-index: 4;
+    }
+    mat-drawer {
+      width: 450px;
+      padding: 16px;
+    }
 
-      mat-drawer-container {
-          height: calc(100% - 64px);
-          
-      }
-      mat-drawer-content{
-          overflow: hidden;
-          display: flex;
-          flex-direction: column;
-          align-items: stretch;
-          justify-content: stretch;
-      }
-      mat-tab-group{
-          flex-shrink: 0;
-      }
-      mat-card {
-          margin: 4px;
-      }
+    app-editor {
+      width: 100%;
+      height: 100%;
+    }
 
-      button {
-          margin: 8px
-      }
+    mat-drawer-container {
+      height: calc(100% - 64px);
       
-      #compile {
-          position: absolute;
-          right: 16px;
-          bottom: 16px;
+      
+    }
+    @media (max-width: 599px){
+      mat-drawer-container{
+        height: calc(100% - 56px);
       }
+    }
+    mat-drawer-content {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: stretch;
+    }
+
+    mat-tab-group {
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    mat-card {
+      margin: 4px;
+    }
+
+    button {
+      margin: 8px
+    }
+
+    #compile {
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+    }
   `]
 })
 export class MainViewComponent {
   AllComponents = AllComponents;
-  constructor(public nodeEditor: NodeEditorService){
+
+  constructor(public nodeEditor: NodeEditorService) {
 
   }
 }

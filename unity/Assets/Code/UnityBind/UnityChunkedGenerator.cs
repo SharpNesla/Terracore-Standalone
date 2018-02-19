@@ -12,10 +12,6 @@ using Cursor = Code.UnityBind.Cursor;
 
 namespace Assets.SimpleGenerator
 {
-    public struct obj
-    {
-        public int x;
-    }
     [RequireComponent (typeof (Cursor))]
     public class UnityChunkedGenerator : MonoBehaviour
     {
@@ -30,7 +26,7 @@ namespace Assets.SimpleGenerator
         private List<UnityChunk> _refreshingChunks;
         private List<Pair> _refreshingPositions;
 
-        public void Refresh(obj co)
+        public void Refresh()
         {
             if (_chunks != null)
             {
@@ -57,7 +53,6 @@ namespace Assets.SimpleGenerator
             _refreshingChunks = new List<UnityChunk>();
             _refreshingPositions = new List<Pair>();
             StartCoroutine(Create());
-            Debug.Log(co.x);
         }
 
         private CellImpl CellInitializer(Pair coords)
@@ -79,7 +74,7 @@ namespace Assets.SimpleGenerator
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
-                Refresh(new obj());
+                Refresh();
             }
         }
 

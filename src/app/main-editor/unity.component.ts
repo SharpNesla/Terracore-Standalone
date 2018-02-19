@@ -13,7 +13,6 @@ import {UnityService} from "../model/unity.service";
         </mat-icon>
       </button>
     </div>
-    
   `,
   styles: [`
     button{
@@ -35,6 +34,4 @@ export class UnityComponent{
   constructor(public unityService: UnityService){
     this.unityService.loadUnityInstance();
   }
-
-
 }

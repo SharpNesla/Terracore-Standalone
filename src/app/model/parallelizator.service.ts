@@ -6,4 +6,6 @@ export class ParallelizatorService {
   constructor() {
     const pool = new threads.Pool(3);
   }
+
+
 }

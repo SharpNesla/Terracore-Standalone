@@ -35,8 +35,6 @@ namespace Assets.SimpleGenerator
                     
                 }
             );*/
-            
-            chunkTime = DateTime.Now;
             var coordinates = new Pair(Position.X * Parent.TerrainSettings.Resolution, Position.Y * Parent.TerrainSettings.Resolution);
             var size = new Pair(Parent.TerrainSettings.Resolution, Parent.TerrainSettings.Resolution);
             _storage.ApplyCells(Parent.Core, size, coordinates);
@@ -45,6 +43,7 @@ namespace Assets.SimpleGenerator
 
             gameObject.transform.position = new Vector3(Position.X * Parent.TerrainSettings.TerrainScale.x, 0,
                 Position.Y * Parent.TerrainSettings.TerrainScale.x);
+            
             Debug.LogFormat("Refreshing chunk -> x:{0}, y:{1}, <>:{2}", Position.X, Position.Y, DateTime.Now - chunkTime);
             
             //AsyncDispatcher.Queue(_refreshTask);

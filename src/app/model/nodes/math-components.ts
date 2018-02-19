@@ -13,10 +13,8 @@ class AddComponentProto extends D3NE.Component {
         const add = new D3NE.Output('Output', numSocket);
         return node.addInput(numbers).addOutput(add);
       },
-      worker(node, inputs, outputs, point) {
+      worker(node, inputs, outputs) {
         outputs[0] = inputs[0].reduce((acc, cur) => acc + cur);
-        console.log(outputs[0]);
-        console.log(point)
       }
     });
   }
@@ -32,9 +30,8 @@ class MultiplyComponentProto extends D3NE.Component {
         const add = new D3NE.Output('Output', numSocket);
         return node.addInput(numbers).addOutput(add);
       },
-      worker(node, inputs, outputs, point) {
+      worker(node, inputs, outputs) {
         outputs[0] = inputs[0].reduce((acc, cur) => acc * cur);
-
       }
     });
   }
@@ -50,7 +47,7 @@ class SubtractComponentProto extends D3NE.Component {
         const add = new D3NE.Output('Output', numSocket);
         return node.addInput(numbers).addOutput(add);
       },
-      worker(node, inputs, outputs, point) {
+      worker(node, inputs, outputs) {
         outputs[0] = inputs[0].reduce((acc, cur) => acc + cur);
 
       }
@@ -68,7 +65,7 @@ class DivideComponentProto extends D3NE.Component {
         const add = new D3NE.Output('Output', numSocket);
         return node.addInput(numbers).addOutput(add);
       },
-      worker(node, inputs, outputs, point) {
+      worker(node, inputs, outputs) {
         outputs[0] = inputs[0].reduce((acc, cur) => acc / cur);
       }
     });
@@ -85,7 +82,7 @@ class PowerComponentProto extends D3NE.Component {
         const add = new D3NE.Output('Output', numSocket);
         return node.addInput(numbers).addOutput(add);
       },
-      worker(node, inputs, outputs, point) {
+      worker(node, inputs, outputs) {
         outputs[0] = inputs[0].reduce((acc, cur) => acc / cur);
       }
     });

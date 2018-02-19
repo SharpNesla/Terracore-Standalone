@@ -6,6 +6,7 @@ import {UnityService} from "./unity.service";
 import {AllComponents, AllComponentsFlat} from "./nodes/components";
 import {ParallelizatorService} from "./parallelizator.service";
 import {Core} from "./core";
+import {numSocket} from "./sockets/sockets";
 
 @Injectable()
 export class NodeEditorService {
@@ -38,6 +39,7 @@ export class NodeEditorService {
 
   compile(){
     const engine = new Core();
-    engine.getCell(this.editor.toJSON())
+
+    engine.getCell(this.editor,{x:0,y:0}, null)
   }
 }

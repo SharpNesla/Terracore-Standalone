@@ -5,13 +5,13 @@ export class UnityService {
   private GameInstance: any;
 
   async loadUnityInstance(){
-    //this.GameInstance = UnityLoader.instantiate("gameContainer", "Build/unity.json", {onProgress: UnityProgress});
+    this.GameInstance = UnityLoader.instantiate("gameContainer", "Build/unity.json", {onProgress: UnityProgress});
   }
   toggleFullscreen(){
     this.GameInstance.SetFullscreen(1)
   }
 
-  Compile(){
-    this.GameInstance.SendMessage('Pool', 'Refresh', JSON.stringify({x:24325}));
+  Compile(data){
+    this.GameInstance.SendMessage('Pool', 'Refresh', data);
   }
 }

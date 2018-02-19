@@ -1,30 +1,32 @@
 import {numSocket} from "../sockets/sockets";
 
 class HeightMapComponentProto extends D3NE.Component {
-  Title = "HeightMap";
   constructor() {
-    super("HeightMap", {
+    super("HeightMap", <D3NE.ComponentProps>{
       builder(node: D3NE.Node) {
         const input = new D3NE.Input('Number', numSocket);
         return node.addInput(input);
       },
-      worker(node, inputs, outputs) {
-        console.log(inputs)
+      worker(node, inputs, outputs, point, terrainData, isHeightMapProcess) {
+        if (isHeightMapProcess) {
+          console.log("HEIGHTMAP: " + inputs)
+        }
       }
     })
   }
 }
 
 class SplatMapComponentProto extends D3NE.Component {
-  Title = "SplatMap";
   constructor() {
-    super("SplatMap", {
+    super("SplatMap", <D3NE.ComponentProps>{
       builder(node: D3NE.Node) {
         const input = new D3NE.Input('Number', numSocket);
         return node.addInput(input);
       },
-      worker(node, inputs, outputs) {
-        outputs[0] = inputs[0][0];
+      worker(node, inputs, outputs, point, terrainData, isHeightMapProcess) {
+        if (!isHeightMapProcess) {
+          console.log("SplatMap: " + inputs)
+        }
       }
     })
   }
@@ -33,13 +35,15 @@ class SplatMapComponentProto extends D3NE.Component {
 class ObjectMapComponentProto extends D3NE.Component {
   Title = "ObjectMap";
   constructor() {
-    super("ObjectMap", {
+    super("ObjectMap", <D3NE.ComponentProps>{
       builder(node: D3NE.Node) {
         const input = new D3NE.Input('Number', numSocket);
         return node.addInput(input);
       },
-      worker(node, inputs, outputs) {
-        outputs[0] = inputs[0][0];
+      worker(node, inputs, outputs, point, terrainData, isHeightMapProcess) {
+        if (!isHeightMapProcess) {
+
+        }
       }
     })
   }
@@ -48,13 +52,15 @@ class ObjectMapComponentProto extends D3NE.Component {
 class DetailMapComponentProto extends D3NE.Component {
   Title = "DetailMap";
   constructor() {
-    super("DetailMap", {
+    super("DetailMap", <D3NE.ComponentProps>{
       builder(node: D3NE.Node) {
         const input = new D3NE.Input('Number', numSocket);
         return node.addInput(input);
       },
-      worker(node, inputs, outputs) {
-        outputs[0] = inputs[0][0];
+      worker(node, inputs, outputs, point, terrainData, isHeightMapProcess) {
+        if (!isHeightMapProcess) {
+
+        }
       }
     })
   }
