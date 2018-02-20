@@ -5,7 +5,6 @@ import {AddComponent} from "./nodes/math-components";
 import {UnityService} from "./unity.service";
 import {AllComponents, AllComponentsFlat} from "./nodes/components";
 import {ParallelizatorService} from "./parallelizator.service";
-import {Core} from "./core";
 import {numSocket} from "./sockets/sockets";
 
 @Injectable()
@@ -25,7 +24,6 @@ export class NodeEditorService {
     this.editor = new D3NE.NodeEditor('terracore@0.0.0', container.nativeElement,
       AllComponentsFlat, menu);
 
-
   }
 
   addElement(component){
@@ -34,12 +32,9 @@ export class NodeEditorService {
     nn.position[0] = Math.random() * 300;
     nn.position[1] = Math.random() * 300;
     this.editor.addNode(node);
-    //this.editor.view.zoomAt([node]);
   }
 
   compile(){
-    const engine = new Core();
-
-    engine.getCell(this.editor,{x:0,y:0}, null)
+    console.log(TerrainStorages);
   }
 }

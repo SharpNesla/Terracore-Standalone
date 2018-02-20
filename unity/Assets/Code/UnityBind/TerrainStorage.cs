@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
@@ -14,10 +15,18 @@ namespace Assets.SimpleGenerator
         public float[,,] SplatMap;
         public int [][,] DetailLayers;
         public List<TreeInstance> Instances;
+        public int Index;
+        
+        [DllImport("__Internal")]
+        private static extern void InitTerrainStorage(int index, float[,] heights, int heightLength,
+            float[,,] splatmaps, int splatmapsLength, int detailPrototypesCount);
 
-        public List<SplatPrototype> Prototypes;
+        [DllImport("__Internal")]
+        private static extern void InitTerrainStorageDetailsMap(int index, int detailLayerId,
+            int[,] layer, int layerLength);
 
-        private TerrainStorage(TerrainData data)
+        
+        private TerrainStorage(TerrainData data, int index)
         {
             Heights = new float[data.heightmapWidth, data.heightmapHeight];
             SplatMap = new float
@@ -30,12 +39,22 @@ namespace Assets.SimpleGenerator
                 DetailLayers[i] = new int[data.detailHeight, data.detailWidth];
             }
 
-            Instances = new List<TreeInstance>(10000);
+            Index = index;
+            
+            Instances = new List<TreeInstance>();
+            
+            InitTerrainStorage(Index, Heights, Heights.Length,
+                SplatMap, SplatMap.Length, DetailLayers.Length);
+
+            for (int i = 0; i < DetailLayers.Length; i++)
+            {
+                InitTerrainStorageDetailsMap(Index, i, DetailLayers[i], DetailLayers[i].Length);
+            }
         }
 
-        public static TerrainStorage FromTerrainData(TerrainData data)
+        public static TerrainStorage FromTerrainData(TerrainData data, int index)
         {
-            return new TerrainStorage(data);
+            return new TerrainStorage(data, index);
         }
 
         public void Reset(Pair size, Pair position)

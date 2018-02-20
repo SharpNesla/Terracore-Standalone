@@ -8,3 +8,4 @@ declare var nw: any;
 
 declare var UnityProgress: any;
 declare var UnityLoader: any;
+declare var TerrainStorages: any;

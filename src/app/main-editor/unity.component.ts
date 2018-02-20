@@ -1,4 +1,4 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {AfterViewInit, Component, HostListener} from '@angular/core';
 import {UnityService} from "../model/unity.service";
 
 @Component({
@@ -33,5 +33,9 @@ import {UnityService} from "../model/unity.service";
 export class UnityComponent{
   constructor(public unityService: UnityService){
     this.unityService.loadUnityInstance();
+  }
+  @HostListener('window:terracore-async-code-event', ['$event'])
+  onExecuteAsyncCode(event) {
+    this.unityService.onExecuteAsyncCode(event.detail.index,event.detail.xPos,event.detail.yPos,event.detail.resolution)
   }
 }

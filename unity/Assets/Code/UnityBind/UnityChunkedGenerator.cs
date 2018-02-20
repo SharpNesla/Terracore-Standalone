@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Assets.SimpleGenerator.TerrainModules;
 using Code.Core;
 using Code.Modifiers.Biomes;
@@ -24,8 +25,10 @@ namespace Assets.SimpleGenerator
 
         public CoreImpl Core;
         private List<UnityChunk> _refreshingChunks;
-        private List<Pair> _refreshingPositions;
-
+        
+        [DllImport("__Internal")]
+        private static extern void InitTerrainStorages(int amount);
+        
         public void Refresh()
         {
             if (_chunks != null)
@@ -49,9 +52,8 @@ namespace Assets.SimpleGenerator
             Core = new CoreImpl(CellInitializer,TerrainSettings.Resolution,
                 modifiers);
             _chunks = CreateChunks(biomes);
-
+            InitTerrainStorages(_chunks.Count);
             _refreshingChunks = new List<UnityChunk>();
-            _refreshingPositions = new List<Pair>();
             StartCoroutine(Create());
         }
 
@@ -78,7 +80,7 @@ namespace Assets.SimpleGenerator
             }
         }
 
-        public List<UnityChunk> CreateChunks(IEnumerable<Biome<CellImpl>> biomes)
+        private List<UnityChunk> CreateChunks(IEnumerable<Biome<CellImpl>> biomes)
         {
             var chunksCount = (ViewDistance * 2 + 1) * (ViewDistance * 2 + 1);
             var chunks = new List<UnityChunk>(chunksCount);
@@ -97,6 +99,7 @@ namespace Assets.SimpleGenerator
                     chunk.Parent = this;
                     chunk.Terra = terrain;
                     chunk.Position = new Pair(x, y);
+                    chunk.Index = chunks.Count;
                     chunks.Add(chunk);
                 }
             }
@@ -126,12 +129,10 @@ namespace Assets.SimpleGenerator
                 _refreshingChunks[i].Refresh();
             }
             _refreshingChunks.Clear();
-            _refreshingPositions.Clear();
         }
-
-        public void Start()
+        public void OnTerracoreSyncronization(int index)
         {
+            _chunks[index].OnTerracoreSyncronization();
         }
-
     }
 }
