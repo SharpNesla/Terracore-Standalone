@@ -412,7 +412,7 @@ MonoBehaviour:
     Resolution: 256
     DetailResolutionPerPatch: 8
   CurrentChunkPosition: {x: 0, y: 0}
-  ViewDistance: 2
+  ViewDistance: 1
 --- !u!114 &1720366772
 MonoBehaviour:
   m_ObjectHideFlags: 0

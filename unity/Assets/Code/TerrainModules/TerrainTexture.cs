@@ -17,6 +17,7 @@ namespace Assets.SimpleGenerator.TerrainModules
         public Vector2 Offset, Size;
         [HideInInspector]
         public int TerrainIndex;
+        
         public SplatPrototype ToSplatPrototype()
         {
             var spl = new SplatPrototype

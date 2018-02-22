@@ -3,7 +3,10 @@ import * as threads from "threads";
 
 @Injectable()
 export class ParallelizatorService {
+  private pool;
+
   constructor() {
-    const pool = new threads.Pool(3);
+    this.pool = new threads.Pool(3);
+
   }
 }

@@ -41,13 +41,13 @@ class NoiseComponentProto extends D3NE.Component {
   noise = new LibNoise.generator.Perlin(.01, 2.0, 0.5, 8, 42, this.quality);
 
   constructor() {
-    super("Noise", {
+    super("Noise", <D3NE.ComponentProps>{
       builder(node: D3NE.Node) {
         const out = new D3NE.Output('Number', numSocket);
         return node.addOutput(out)
       },
-      worker(node, inputs, outputs) {
-        outputs[0] = this.noise.getValue(0,0,10);
+      worker(node, inputs, outputs, storage, xPos, yPos, xLocalPos, yLocalPos, resolution) {
+        outputs[0] = this.noise.getValue(xPos , yPos, 0) / 10;
       }
     })
   }

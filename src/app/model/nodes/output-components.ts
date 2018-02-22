@@ -7,10 +7,8 @@ class HeightMapComponentProto extends D3NE.Component {
         const input = new D3NE.Input('Number', numSocket);
         return node.addInput(input);
       },
-      worker(node, inputs, outputs, point, terrainData, isHeightMapProcess) {
-        if (isHeightMapProcess) {
-          console.log("HEIGHTMAP: " + inputs)
-        }
+      worker(node, inputs, outputs, storage, xPos, yPos, xLocalPos, yLocalPos, resolution) {
+        storage.Heights[yLocalPos * (resolution + 1) + xLocalPos] = inputs[0][0]
       }
     })
   }

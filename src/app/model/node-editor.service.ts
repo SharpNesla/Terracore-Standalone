@@ -9,9 +9,9 @@ import {numSocket} from "./sockets/sockets";
 
 @Injectable()
 export class NodeEditorService {
-  private editor: D3NE.NodeEditor;
+  public editor: D3NE.NodeEditor;
 
-  constructor(private unityService: UnityService, private parallel : ParallelizatorService){
+  constructor(private parallel : ParallelizatorService){
 
   }
 
@@ -23,7 +23,6 @@ export class NodeEditorService {
 
     this.editor = new D3NE.NodeEditor('terracore@0.0.0', container.nativeElement,
       AllComponentsFlat, menu);
-
   }
 
   addElement(component){
@@ -35,6 +34,6 @@ export class NodeEditorService {
   }
 
   compile(){
-    console.log(TerrainStorages);
+
   }
 }

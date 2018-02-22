@@ -35,6 +35,9 @@ namespace Assets.SimpleGenerator
 
         public void OnTerracoreSyncronization()
         {
+            //var coordinates = new Pair(Position.X * Parent.TerrainSettings.Resolution, Position.Y * Parent.TerrainSettings.Resolution);
+            //var size = new Pair(Parent.TerrainSettings.Resolution, Parent.TerrainSettings.Resolution);
+            //_storage.ApplyCells(Parent.Core, size, coordinates);
             Terra.terrainData.ApplyTerrainStorage(_storage);
             gameObject.transform.position = new Vector3(Position.X * Parent.TerrainSettings.TerrainScale.x, 0,
                 Position.Y * Parent.TerrainSettings.TerrainScale.x);
