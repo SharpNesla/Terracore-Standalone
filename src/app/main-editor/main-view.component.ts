@@ -47,7 +47,7 @@ import {AllComponents} from "../model/nodes/components";
       <mat-drawer-content>
         <mat-tab-group class="mat-elevation-z4">
           <mat-tab *ngFor="let components of this.AllComponents" [label]="components.title">
-            <button mat-raised-button color="accent"
+            <button mat-raised-button 
                     *ngFor="let input of components.components" (click)="this.nodeEditor.addElement(input)">
               {{input.name}}
             </button>

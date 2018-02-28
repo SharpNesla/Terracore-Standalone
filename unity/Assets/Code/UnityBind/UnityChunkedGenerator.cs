@@ -35,7 +35,7 @@ namespace Assets.SimpleGenerator
             {
                 foreach (var chunk in _chunks)
                 {
-                    Destroy(chunk);
+                    Destroy(chunk.gameObject);
                 }
             }
 

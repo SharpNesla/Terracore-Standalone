@@ -10,6 +10,7 @@ import {PathLocationStrategy} from "@angular/common";
 import {MainViewComponent} from "./main-editor/main-view.component";
 import {MaterialElementsModule} from "./material-elements.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ResourcesComponent} from "./resources.component";
 
 const routes: Routes = [
   {path: '', component: MainViewComponent}
@@ -17,7 +18,11 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ResourcesComponent
+  ],
+  entryComponents: [
+    ResourcesComponent
   ],
   imports: [
     BrowserModule, FormsModule, MaterialElementsModule,

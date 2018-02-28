@@ -1,4 +1,7 @@
 import {Component} from '@angular/core';
+import {MatDialog} from "@angular/material";
+import {ResourcesComponent} from "./resources.component";
+import {NWJSPlatfromSpecificFunctions, PlatformSpecificFunctions} from "./model/util/platform-specific";
 
 @Component({
   selector: 'app-root',
@@ -10,17 +13,13 @@ import {Component} from '@angular/core';
       </button>
 
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          <mat-icon>dialpad</mat-icon>
-          <span>Redial</span>
-        </button>
-        <button mat-menu-item disabled>
-          <mat-icon>voicemail</mat-icon>
-          <span>Check voicemail</span>
+        <button mat-menu-item (click)="this.showResourcesDialog()">
+          <mat-icon>group_work</mat-icon>
+          <span>Resources</span>
         </button>
         <button mat-menu-item>
-          <mat-icon>notifications_off</mat-icon>
-          <span>Disable alerts</span>
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Exit</span>
         </button>
       </mat-menu>
     </mat-toolbar>
@@ -42,7 +41,14 @@ import {Component} from '@angular/core';
   `]
 })
 export class AppComponent {
-  constructor() {
-    nw.Window.get().showDevTools();
+  constructor(public dialog: MatDialog, private pl: NWJSPlatfromSpecificFunctions) {
+    pl.showDebugger();
+  }
+
+  public showResourcesDialog(){
+    let dialogRef = this.dialog.open(ResourcesComponent, {
+      height: '400px',
+      width: '600px',
+    });
   }
 }

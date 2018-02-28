@@ -65,10 +65,14 @@ $grid-color: #363636;
     .title {
       background-color: #34a04d;
     }
+
   }
 
   .add, .subtract, .power, .multiply, .divide{
     .title {
+      background-color: #75909b;
+    }
+    .socket{
       background-color: #75909b;
     }
   }

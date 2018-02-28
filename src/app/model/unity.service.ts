@@ -29,19 +29,14 @@ export class UnityService {
 
     const engine = new Engine("terracore@0.0.0", AllComponentsFlat);
 
-    this.parallel.queue(()=>{
-      for (let y = 0; y <= resolution; y++) {
-        for (let x = 0; x <= resolution; x++) {
-          engine.process(this.nodeEditor.editor.toJSON(), null, TerrainStorages[index],
-            x + xPos * resolution, y + yPos * resolution, x, y, resolution);
-        }
+    for (let y = 0; y <= resolution; y++) {
+      for (let x = 0; x <= resolution; x++) {
+        engine.process(this.nodeEditor.editor.toJSON(), null, TerrainStorages[index],
+          x + xPos * resolution, y + yPos * resolution, x, y, resolution);
       }
+    }
 
-
-    }, ()=>{
-      this.GameInstance.SendMessage('Pool', 'OnTerracoreSyncronization', index)
-    });
-
+    this.GameInstance.SendMessage('Pool', 'OnTerracoreSyncronization', index)
 
     /*for (let y = 0; y <= resolution; y++) {
       for (let x = 0; x <= resolution; x++) {

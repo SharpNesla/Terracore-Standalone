@@ -15,27 +15,30 @@ import {UnityService} from "../model/unity.service";
     </div>
   `,
   styles: [`
-    button{
-        position: absolute;
-        top: 392px;
-        left: 362px;
-    }
-    .webgl-content{
-        margin-bottom: 32px;
-    }
+      button {
+          position: absolute;
+          top: 392px;
+          left: 362px;
+      }
+
+      .webgl-content {
+          margin-bottom: 32px;
+      }
+
       #gameContainer {
           width: 100%;
           height: 450px;
       }
-        
+
   `]
 })
-export class UnityComponent{
-  constructor(public unityService: UnityService){
+export class UnityComponent {
+  constructor(public unityService: UnityService) {
     this.unityService.loadUnityInstance();
   }
+
   @HostListener('window:terracore-async-code-event', ['$event'])
   onExecuteAsyncCode(event) {
-    this.unityService.onExecuteAsyncCode(event.detail.index,event.detail.xPos,event.detail.yPos,event.detail.resolution)
+    this.unityService.onExecuteAsyncCode(event.detail.index, event.detail.xPos, event.detail.yPos, event.detail.resolution)
   }
 }
