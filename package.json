@@ -2,13 +2,13 @@
   "name": "terracore",
   "version": "0.0.0",
   "license": "MIT",
-  "main": "./dist/index.html",
+  "main": "./dist/main.js",
   "scripts": {
     "package": "build --tasks mac-x64 .",
-    "start": "nw .",
+    "start": "electron .",
     "build": "ng build --prod --aot",
     "devbuild": "ng build dist",
-    "watch": "ng build dist -w"
+    "watch": "ng build dist -w --delete-output-path=false & TS_NODE_PROJECT=\"electron/tsconfig.json\" webpack --config='./electron/config.js' --watch"
   },
   "private": true,
   "dependencies": {
@@ -37,13 +37,13 @@
     "codelyzer": "^4.0.1",
     "core-js": "^2.4.1",
     "d3-node-editor": "^0.6.8",
+    "electron": "^1.8.2",
     "fs-extra": "^5.0.0",
     "hammerjs": "^2.0.8",
     "libnoise": "^0.2.1",
-    "nwjs": "^1.4.4",
-    "nwjs-builder-phoenix": "^1.14.6",
     "rxjs": "^5.5.2",
     "threads": "^0.10.1",
+    "ts-loader": "^3.5.0",
     "ts-node": "~3.2.0",
     "typescript": "~2.4.2",
     "zone.js": "^0.8.14"

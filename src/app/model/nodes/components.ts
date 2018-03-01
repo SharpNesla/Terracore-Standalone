@@ -9,8 +9,6 @@ import {numSocket} from "../sockets/sockets";
 export const AllComponents = [
   {title: "Producer Components", components: ProducerComponents},
   {title: "Math Components", components: MathComponents},
-  {title: "Filter Components", components: FilterComponents},
-  {title: "Transform Components", components: TransformComponents},
   {title: "Output Components", components: OutputComponents}
 ];
 

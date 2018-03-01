@@ -42,7 +42,7 @@ import {NWJSPlatfromSpecificFunctions, PlatformSpecificFunctions} from "./model/
 })
 export class AppComponent {
   constructor(public dialog: MatDialog, private pl: NWJSPlatfromSpecificFunctions) {
-    pl.showDebugger();
+    //pl.showDebugger();
   }
 
   public showResourcesDialog(){
