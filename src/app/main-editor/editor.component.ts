@@ -19,7 +19,7 @@ export class EditorComponent implements AfterViewInit {
   @ViewChild('d3neEditor') container: ElementRef;
 
   ngAfterViewInit() {
-    this.nodeEditor.refresh(this.container);
+    this.nodeEditor.specifyNodeEditorContainer(this.container);
   }
 
   constructor(public nodeEditor: NodeEditorService) {

@@ -29,12 +29,11 @@ import {UnityService} from "../model/unity.service";
           width: 100%;
           height: 450px;
       }
-
   `]
 })
 export class UnityComponent {
   constructor(public unityService: UnityService) {
-    this.unityService.loadUnityInstance();
+    //this.unityService.loadUnityInstance();
   }
 
   @HostListener('window:terracore-async-code-event', ['$event'])

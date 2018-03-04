@@ -1,5 +1,3 @@
-var State = {AVALIABLE: 0, PROCESSED: 1, ABORT: 2};
-
 export class Engine {
 
   readonly id: string;

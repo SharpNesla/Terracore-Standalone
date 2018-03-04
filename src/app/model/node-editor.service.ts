@@ -7,23 +7,37 @@ import {AllComponents, AllComponentsFlat} from "./nodes/components";
 import {ParallelizatorService} from "./parallelizator.service";
 import {numSocket} from "./sockets/sockets";
 import {DataService} from "./data.service";
+import {ElectronService} from "ngx-electron";
 
 @Injectable()
 export class NodeEditorService {
-  public editor: D3NE.NodeEditor;
+  public Editor: D3NE.NodeEditor;
+  private container: ElementRef;
 
-  constructor(private parallel: ParallelizatorService, private dataService: DataService) {
+  constructor(private parallel: ParallelizatorService, private dataService: DataService, private el: ElectronService) {
 
   }
-
-  refresh(container: ElementRef) {
+  specifyNodeEditorContainer(container: ElementRef){
+    this.container = container;
     const menu = new D3NE.ContextMenu({
       Add: AddComponent,
       Const: ConstComponent
     });
 
-    this.editor = new D3NE.NodeEditor('terracore@0.0.0', container.nativeElement,
+    this.Editor = new D3NE.NodeEditor('terracore@0.0.0', this.container.nativeElement,
       AllComponentsFlat, menu);
+  }
+  createNewConfiguration() {
+    this.Editor.clear();
+    this.dataService.createNewData();
+  }
+
+  saveConfiguration(){
+    this.dataService.saveData();
+  }
+
+  loadConfiguration(){
+    this.dataService.loadData()
   }
 
   addElement(component) {
@@ -31,24 +45,20 @@ export class NodeEditorService {
     const node = component.builder(nn);
     nn.position[0] = Math.random() * 300;
     nn.position[1] = Math.random() * 300;
-    this.editor.addNode(node);
+    this.Editor.addNode(node);
   }
 
   compile() {
-
-
-    const backup = this.editor.toJSON();
-    const heightMap = this.editor.nodes.find(x => x.title == 'HeightMap');
-    const splatMaps = this.editor.nodes.filter(x => x.title == 'SplatMap');
-    const detailMaps = this.editor.nodes.filter(x => x.title == 'DetailMap');
-    const objectMaps = this.editor.nodes.filter(x => x.title == 'ObjectMap');
+    const backup = this.Editor.toJSON();
+    const heightMap = this.Editor.nodes.find(x => x.title == 'HeightMap');
+    const splatMaps = this.Editor.nodes.filter(x => x.title == 'SplatMap');
+    const detailMaps = this.Editor.nodes.filter(x => x.title == 'DetailMap');
+    const objectMaps = this.Editor.nodes.filter(x => x.title == 'ObjectMap');
 
     //this.dataService.saveData('/Users/nesla/Documents/')
   }
 
-
-
-  optimizeGraph(node: D3NE.Node){
+  private optimizeGraph(node: D3NE.Node){
     let nodeAccumulator: D3NE.Node[] = [node];
 
     let findConnectedNodes = (accumulator: D3NE.Node[], node: D3NE.Node) => {
@@ -61,9 +71,14 @@ export class NodeEditorService {
 
     let diff = (b, a) => b.filter(i => a.indexOf(i) < 0);
     findConnectedNodes(nodeAccumulator, node);
-    for (let i of diff(this.editor.nodes, nodeAccumulator)) {
-      this.editor.removeNode(i);
+    for (let i of diff(this.Editor.nodes, nodeAccumulator)) {
+      this.Editor.removeNode(i);
     }
+
+  }
+
+  close(){
+    setInterval(this.el.remote.getCurrentWindow().close, 200)
 
   }
 }

@@ -11,15 +11,17 @@ import {MainViewComponent} from "./main-editor/main-view.component";
 import {MaterialElementsModule} from "./material-elements.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ResourcesComponent} from "./resources.component";
+import {ChooseImageComponent} from "./choose-image.component";
 
 const routes: Routes = [
   {path: '', component: MainViewComponent}
-]
+];
 
 @NgModule({
   declarations: [
     AppComponent,
-    ResourcesComponent
+    ResourcesComponent,
+    ChooseImageComponent
   ],
   entryComponents: [
     ResourcesComponent

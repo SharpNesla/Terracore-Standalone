@@ -12,7 +12,6 @@ const LibNoise = LN.libnoise;
 export class UnityService {
   private GameInstance: any;
 
-
   constructor(private nodeEditor: NodeEditorService, private parallel : ParallelizatorService) {
 
   }
@@ -31,7 +30,7 @@ export class UnityService {
 
     for (let y = 0; y <= resolution; y++) {
       for (let x = 0; x <= resolution; x++) {
-        engine.process(this.nodeEditor.editor.toJSON(), null, TerrainStorages[index],
+        engine.process(this.nodeEditor.Editor.toJSON(), null, TerrainStorages[index],
           x + xPos * resolution, y + yPos * resolution, x, y, resolution);
       }
     }

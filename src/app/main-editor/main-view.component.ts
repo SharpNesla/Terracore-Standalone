@@ -5,8 +5,7 @@ import {AllComponents} from "../model/nodes/components";
 
 @Component({
   selector: 'app-main-view',
-  template: `
-
+  template: `    
     <mat-drawer-container class="example-container">
       <mat-drawer class="mat-elevation-z4" mode="side" opened="true">
         <app-editor-unity>
@@ -30,8 +29,7 @@ import {AllComponents} from "../model/nodes/components";
               <input matInput placeholder="Age">
             </mat-form-field>
           </mat-expansion-panel>
-          <mat-expansion-panel (opened)="panelOpenState = true"
-                               (closed)="panelOpenState = false">
+          <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
                 Node Settings
@@ -47,8 +45,9 @@ import {AllComponents} from "../model/nodes/components";
       <mat-drawer-content>
         <mat-tab-group class="mat-elevation-z4">
           <mat-tab *ngFor="let components of this.AllComponents"  [label]="components.title">
-            <button mat-raised-button 
-                    *ngFor="let input of components.components" [ngClass]="input.name.toLowerCase()" (click)="this.nodeEditor.addElement(input)">
+            <button mat-raised-button
+                    *ngFor="let input of components.components" class="tab-button" [ngClass]="input.name.toLowerCase()" 
+                    (click)="this.nodeEditor.addElement(input)">
               {{input.name}}
             </button>
           </mat-tab>
@@ -62,9 +61,7 @@ import {AllComponents} from "../model/nodes/components";
   `,
   //language=SCSS
   styles: [`
-    button{
-      z-index: 4;
-    }
+
     mat-drawer {
       width: 450px;
       padding: 16px;
@@ -76,13 +73,12 @@ import {AllComponents} from "../model/nodes/components";
     }
 
     mat-drawer-container {
-      height: calc(100% - 64px);
-      
-      
+      height: calc(100% - 64px - 22px);
     }
+    
     @media (max-width: 599px){
       mat-drawer-container{
-        height: calc(100% - 56px);
+        height: calc(100% - 56px - 22px);
       }
     }
     mat-drawer-content {
@@ -103,7 +99,7 @@ import {AllComponents} from "../model/nodes/components";
     }
 
     button {
-      margin: 8px
+      margin: 8px;
     }
 
     #compile {

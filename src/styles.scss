@@ -19,9 +19,9 @@ body {
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://www.google.com/design/spec/style/color.html
 $candy-app-primary: mat-palette($mat-blue, 600, 500, 800);
-$candy-app-accent:  mat-palette($mat-green, 600, 100, 400);
+$candy-app-accent: mat-palette($mat-green, 600, 100, 400);
 // The warn palette is optional (defaults to red).
-$candy-app-warn:   mat-palette($mat-red);
+$candy-app-warn: mat-palette($mat-red);
 // Create the theme object (a Sass map containing all of the palettes).
 $candy-app-theme: mat-dark-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
 
@@ -47,7 +47,7 @@ $candy-app-theme: mat-dark-theme($candy-app-primary, $candy-app-accent, $candy-a
   font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
-  font-size: 24px;  /* Preferred icon size */
+  font-size: 24px; /* Preferred icon size */
   display: inline-block;
   line-height: 1;
   text-transform: none;
@@ -69,11 +69,11 @@ $candy-app-theme: mat-dark-theme($candy-app-primary, $candy-app-accent, $candy-a
 }
 
 ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  //-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
 ::-webkit-scrollbar {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  //-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   width: 6px;
   height: 6px;
 }
@@ -82,6 +82,39 @@ $candy-app-theme: mat-dark-theme($candy-app-primary, $candy-app-accent, $candy-a
   background-color: #ffffff;
 }
 
-.context-menu{
+.context-menu {
   z-index: 2;
+}
+
+@mixin node-modifier($color) {
+  .title {
+    background-color: $color;
+  }
+
+  .socket {
+    background-color: $color;
+  }
+  &.tab-button{
+    background-color: $color;
+  }
+}
+
+.const, .noise, .grayscale, .random {
+  @include node-modifier(#34a04d)
+}
+
+.add, .subtract, .power, .multiply, .divide {
+  @include node-modifier(#75909b);
+}
+
+.slope {
+  @include node-modifier(#0088e1);
+}
+
+.heightmap, .splatmap, .detailmap, .objectmap {
+  @include node-modifier(#f33f79);
+}
+
+mat-dialog-container{
+  position: relative !important;
 }

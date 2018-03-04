@@ -4,14 +4,14 @@ import {ParallelizatorService} from "./parallelizator.service";
 import {NodeEditorService} from "./node-editor.service";
 import {UnityService} from "./unity.service";
 import {DataService} from "./data.service";
-import {NWJSPlatfromSpecificFunctions} from "./util/platform-specific";
+import {NgxElectronModule} from 'ngx-electron';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule, NgxElectronModule
   ],
   declarations: [],
-  providers: [ParallelizatorService, NodeEditorService, UnityService, DataService, NWJSPlatfromSpecificFunctions]
+  providers: [ParallelizatorService, NodeEditorService, UnityService, DataService]
 })
 export class ModelModule {
 }
