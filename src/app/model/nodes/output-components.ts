@@ -19,12 +19,26 @@ class SplatMapComponentProto extends D3NE.Component {
     super("SplatMap", <D3NE.ComponentProps>{
       builder(node: D3NE.Node) {
         const input = new D3NE.Input('Number', numSocket);
-        return node.addInput(input);
+        const control = new D3NE.Control('<input type="number">',
+          (el: HTMLInputElement, c: any) => {
+            el.value = (c.getData('index') || 1).toString();
+
+            function upd() {
+              c.putData("index", parseFloat(el.value));
+            }
+
+            el.addEventListener("input", ()=>{
+              upd();
+            });
+
+            el.addEventListener("mousedown", function(e){e.stopPropagation()});// prevent node movement when selecting text in the input field
+            upd();
+          }
+        );
+        return node.addInput(input).addControl();
       },
-      worker(node, inputs, outputs, point, terrainData, isHeightMapProcess) {
-        if (!isHeightMapProcess) {
-          console.log("SplatMap: " + inputs)
-        }
+      worker(node, inputs, outputs, point, terrainData) {
+
       }
     })
   }
@@ -38,10 +52,8 @@ class ObjectMapComponentProto extends D3NE.Component {
         const input = new D3NE.Input('Number', numSocket);
         return node.addInput(input);
       },
-      worker(node, inputs, outputs, point, terrainData, isHeightMapProcess) {
-        if (!isHeightMapProcess) {
+      worker(node, inputs, outputs, point, terrainData) {
 
-        }
       }
     })
   }
@@ -55,10 +67,8 @@ class DetailMapComponentProto extends D3NE.Component {
         const input = new D3NE.Input('Number', numSocket);
         return node.addInput(input);
       },
-      worker(node, inputs, outputs, point, terrainData, isHeightMapProcess) {
-        if (!isHeightMapProcess) {
+      worker(node, inputs, outputs, point, terrainData) {
 
-        }
       }
     })
   }

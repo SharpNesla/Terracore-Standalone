@@ -1,23 +1,36 @@
-import {ElementRef, Injectable} from "@angular/core";
+import {ComponentFactoryResolver, ElementRef, Injectable} from "@angular/core";
 import {ConstComponent} from "./nodes/producer-components";
-import {Menu} from "nw.gui";
 import {AddComponent} from "./nodes/math-components";
 import {UnityService} from "./unity.service";
 import {AllComponents, AllComponentsFlat} from "./nodes/components";
-import {ParallelizatorService} from "./parallelizator.service";
+import {ExecutorService} from "./executor.service";
 import {numSocket} from "./sockets/sockets";
 import {DataService} from "./data.service";
 import {ElectronService} from "ngx-electron";
+import {Engine} from "./util/engine";
 
 @Injectable()
 export class NodeEditorService {
+  public Selected: D3NE.Node;
+
+  public get SelectedNodeKeys() {
+    return this.Selected != null ? Object.keys(this.Selected.data) : [];
+  };
+
   public Editor: D3NE.NodeEditor;
   private container: ElementRef;
+  Engine = new Engine("terracore@0.0.0", AllComponentsFlat);
+  private static Service: NodeEditorService;
 
-  constructor(private parallel: ParallelizatorService, private dataService: DataService, private el: ElectronService) {
-
+  constructor(private UnityService: UnityService, private parallel: ExecutorService,
+              public dataService: DataService, private el: ElectronService) {
+    NodeEditorService.Service = this;
+    this.dataService.DataLoaded.subscribe(x => {
+      this.Editor.fromJSON(this.dataService.EditorJson);
+    })
   }
-  specifyNodeEditorContainer(container: ElementRef){
+
+  specifyNodeEditorContainer(container: ElementRef) {
     this.container = container;
     const menu = new D3NE.ContextMenu({
       Add: AddComponent,
@@ -26,18 +39,29 @@ export class NodeEditorService {
 
     this.Editor = new D3NE.NodeEditor('terracore@0.0.0', this.container.nativeElement,
       AllComponentsFlat, menu);
+
+    this.Editor.eventListener.on('nodecreate', (node?: D3NE.Node, persistent?: boolean) => {
+      this.Selected = node;
+      console.log(this.SelectedNodeKeys);
+      return true;
+    });
+
   }
+
   createNewConfiguration() {
     this.Editor.clear();
     this.dataService.createNewData();
   }
 
-  saveConfiguration(){
+
+  saveConfiguration() {
+    this.dataService.EditorJson = this.Editor.toJSON();
     this.dataService.saveData();
   }
 
-  loadConfiguration(){
-    this.dataService.loadData()
+  loadConfiguration() {
+    this.dataService.loadData();
+
   }
 
   addElement(component) {
@@ -49,36 +73,15 @@ export class NodeEditorService {
   }
 
   compile() {
-    const backup = this.Editor.toJSON();
-    const heightMap = this.Editor.nodes.find(x => x.title == 'HeightMap');
-    const splatMaps = this.Editor.nodes.filter(x => x.title == 'SplatMap');
-    const detailMaps = this.Editor.nodes.filter(x => x.title == 'DetailMap');
-    const objectMaps = this.Editor.nodes.filter(x => x.title == 'ObjectMap');
-
-    //this.dataService.saveData('/Users/nesla/Documents/')
+    this.UnityService.compile(this.dataService.UnityProjectJson);
+    this.parallel.compile(this.Editor);
   }
 
-  private optimizeGraph(node: D3NE.Node){
-    let nodeAccumulator: D3NE.Node[] = [node];
-
-    let findConnectedNodes = (accumulator: D3NE.Node[], node: D3NE.Node) => {
-      const nodes = node.getConnections('input').map(x => x.output.node);
-      accumulator.push(...nodes);
-      for (let i of nodes) {
-        findConnectedNodes(accumulator, i)
-      }
-    };
-
-    let diff = (b, a) => b.filter(i => a.indexOf(i) < 0);
-    findConnectedNodes(nodeAccumulator, node);
-    for (let i of diff(this.Editor.nodes, nodeAccumulator)) {
-      this.Editor.removeNode(i);
-    }
-
-  }
-
-  close(){
+  close() {
     setInterval(this.el.remote.getCurrentWindow().close, 200)
+  }
 
+  static getInstance() {
+    return this.Service;
   }
 }

@@ -64,3 +64,6 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
+
+/// <reference path="../node_modules/d3-node-editor/src/index.d.ts"/>
+import 'hammerjs';

@@ -42,20 +42,20 @@ import NodeEditor = D3NE.NodeEditor;
             <h3>Offset</h3>
             <mat-form-field color="accent">
               <span matPrefix>x: &nbsp;</span>
-              <input matInput [(ngModel)]="splat.Offset.X">
+              <input matInput [(ngModel)]="splat.Offset.x">
             </mat-form-field>
             <mat-form-field color="accent">
               <span matPrefix>y: &nbsp;</span>
-              <input matInput [(ngModel)]="splat.Offset.Y">
+              <input matInput [(ngModel)]="splat.Offset.y">
             </mat-form-field>
             <h3>Scale</h3>
             <mat-form-field color="accent">
               <span matPrefix>x: &nbsp;</span>
-              <input matInput [(ngModel)]="splat.Size.X">
+              <input matInput [(ngModel)]="splat.Size.x">
             </mat-form-field>
             <mat-form-field color="accent">
               <span matPrefix>y: &nbsp;</span>
-              <input matInput [(ngModel)]="splat.Size.Y">
+              <input matInput [(ngModel)]="splat.Size.y">
             </mat-form-field>
           </span>
         </div>

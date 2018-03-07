@@ -2,6 +2,7 @@ import {app, BrowserWindow, dialog, ipcMain, OpenDialogOptions, SaveDialogOption
 import * as fs from "fs-extra";
 import * as path from "path";
 import {Data, TerrainSplatMaterial} from "../src/app/model/data.service";
+import * as PATH from "path";
 
 declare const __dirname: string;
 let mainWindow: Electron.BrowserWindow;
@@ -41,18 +42,22 @@ const openProjectOptions: OpenDialogOptions = <OpenDialogOptions>{
 };
 
 app.on('ready', onReady);
+
+
 app.on('window-all-closed', app.quit);
 
 ipcMain.on('saveData', (event, data: Data) => {
   dialog.showSaveDialog(mainWindow, saveOptions, async x => {
     if (x != undefined) {
       await fs.emptyDir(x);
-      await fs.writeFile(path.resolve(x, `project.json`), JSON.stringify(data));
       try {
         for (let [index, value] of data.TerrainSplatMaterials.entries()) {
           await fs.copy(value.AlbedoPath, path.resolve(x, `Splat${index}.png`));
           await fs.copy(value.NormalMapPath, path.resolve(x, `NormalMap${index}.png`))
+          value.AlbedoPath = `Splat${index}.png`;
+          value.NormalMapPath = `NormalMap${index}.png`;
         }
+        await fs.writeFile(path.resolve(x, `project.json`), JSON.stringify(data));
       } catch (err) {}
       mainWindow.webContents.send("onSaveData", x)
     }
@@ -64,7 +69,7 @@ ipcMain.on('loadData', (event) => {
     if (filename != undefined) {
       try {
         const content = await fs.readFile(path.resolve(filename[0], 'project.json'), 'utf8');
-        mainWindow.webContents.send('onDataLoaded', JSON.parse(content));
+        mainWindow.webContents.send('onDataLoaded', { data : JSON.parse(content), path: filename[0]});
       }
       catch (err) {
         mainWindow.webContents.send('onDataError');

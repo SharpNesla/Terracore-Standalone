@@ -1,4 +1,4 @@
-import {Injectable} from "@angular/core";
+import {EventEmitter, Injectable} from "@angular/core";
 import {Vector2} from "./util/vector";
 import {ElectronService, NgxElectronModule} from "ngx-electron";
 import * as fs from "fs-extra";
@@ -25,7 +25,14 @@ export class TerrainSplatMaterial {
 
 }
 
+export class TerrainSettings {
+  constructor(public IsInifinite = true,
+              public ViewDistance = 2,
+              public Resolution = 256){}
+}
+
 export class Data {
+  TerrainSettings : TerrainSettings = new TerrainSettings();
   TerrainSplatMaterials: TerrainSplatMaterial[] = [];
   TerrainGrass: TerrainGrass[] = [];
   EditorJson: string = '';
@@ -33,39 +40,65 @@ export class Data {
 
 @Injectable()
 export class DataService {
-
+  public CurrentProjectPath = '';
   private static Data: Data;
-  private static Service;
 
   get SplatMaterials(): TerrainSplatMaterial[] {
     return DataService.Data.TerrainSplatMaterials;
+  }
+
+  get TerrainSettings(){
+    return DataService.Data.TerrainSettings;
   }
 
   get GrassMaterials(): TerrainGrass[] {
     return DataService.Data.TerrainGrass;
   }
 
+  get UnityProjectJson(){
+    const editorJson = DataService.Data.EditorJson;
+    DataService.Data.EditorJson = '';
+
+    for (let [index, value] of DataService.Data.TerrainSplatMaterials.entries()) {
+      value.AlbedoPath = PATH.resolve(this.CurrentProjectPath, `Splat${index}.png`);
+      value.NormalMapPath = PATH.resolve(this.CurrentProjectPath, `NormalMap${index}.png`);
+    }
+
+    const json = JSON.stringify(DataService.Data);
+
+    for (let [index, value] of DataService.Data.TerrainSplatMaterials.entries()) {
+      value.AlbedoPath = `Splat${index}.png`;
+      value.NormalMapPath = `NormalMap${index}.png`;
+    }
+
+    DataService.Data.EditorJson = editorJson
+    return json;
+  }
+
   get EditorJson(): string {
-    return DataService.Data.EditorJson
+    return DataService.Data.EditorJson;
   }
 
   set EditorJson(value) {
     DataService.Data.EditorJson = value;
   }
 
+  DataLoaded : EventEmitter<Data> = new EventEmitter<Data>();
+
   constructor(private electronService: ElectronService) {
-    DataService.Service = this;
     this.createNewData();
-    this.electronService.ipcRenderer.on('onDataLoaded', (event, arg: Data) => {
-      DataService.Data = arg;
+    this.electronService.ipcRenderer.on('onDataLoaded', (event, arg) => {
+      DataService.Data = arg.data;
+      this.CurrentProjectPath = arg.path;
+      this.DataLoaded.emit(DataService.Data = arg.data);
     });
     this.electronService.ipcRenderer.on('onDataError', (event) => {
 
     });
     this.electronService.ipcRenderer.on('onSaveData', (event, path: string) => {
       for (let [index, value] of DataService.Data.TerrainSplatMaterials.entries()) {
-        value.AlbedoPath = PATH.resolve(path, `Splat${index}.png`);
-        value.NormalMapPath = PATH.resolve(path, `NormalMap${index}.png`);
+        value.AlbedoPath = `Splat${index}.png`;
+        value.NormalMapPath = `NormalMap${index}.png`;
       }
     });
   }
@@ -115,9 +148,5 @@ export class DataService {
 
   specifyGrassAlbedo() {
 
-  }
-
-  static getInstance() {
-    return DataService.Service;
   }
 }

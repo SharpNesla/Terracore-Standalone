@@ -88,7 +88,6 @@
             <e p="CameraController.cs" t="Include" />
             <e p="Cursor.cs" t="Include" />
             <e p="ExampleClass.cs" t="Include" />
-            <e p="TerracoreGenerator.cs" t="Include" />
             <e p="TerrainStorage.cs" t="Include" />
             <e p="UnityChunk.cs" t="Include" />
             <e p="UnityChunkedGenerator.cs" t="Include" />
@@ -664,11 +663,34 @@
             <e p="WaypointProgressTracker.cs" t="Include" />
           </e>
         </e>
+        <e p="TerrainShaders" t="Include">
+          <e p="Details" t="Include">
+            <e p="VertexLit.shader" t="Include" />
+            <e p="WavingGrass.shader" t="Include" />
+            <e p="WavingGrassBillboard.shader" t="Include" />
+          </e>
+          <e p="Splats" t="Include">
+            <e p="AddPass.shader" t="Include" />
+            <e p="FirstPass.shader" t="Include" />
+            <e p="Specular-AddPass.shader" t="Include" />
+            <e p="Specular-Base.shader" t="Include" />
+            <e p="Specular-FirstPass.shader" t="Include" />
+            <e p="Standard-AddPass.shader" t="Include" />
+            <e p="Standard-Base.shader" t="Include" />
+            <e p="Standard-FirstPass.shader" t="Include" />
+          </e>
+          <e p="Trees" t="Include">
+            <e p="BillboardTree.shader" t="Include" />
+            <e p="CameraFacingBillboardTree.shader" t="Include" />
+          </e>
+        </e>
       </e>
       <e p="Library" t="ExcludeRecursive" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="packages" t="ExcludeRecursive" />
-      <e p="Temp/bin" t="ExcludeRecursive" />
+      <e p="Temp" t="ExcludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+      </e>
       <e p="unity.sln" t="IncludeFlat" />
     </e>
   </component>

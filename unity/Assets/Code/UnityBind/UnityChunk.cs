@@ -33,7 +33,7 @@ namespace Assets.SimpleGenerator
                 ,Position.Y * Parent.TerrainSettings.Resolution, Parent.TerrainSettings.Resolution);
         }
 
-        public void OnTerracoreSyncronization()
+        public void OnTerracoreSyncronization(string treePositions)
         {
             //var coordinates = new Pair(Position.X * Parent.TerrainSettings.Resolution, Position.Y * Parent.TerrainSettings.Resolution);
             //var size = new Pair(Parent.TerrainSettings.Resolution, Parent.TerrainSettings.Resolution);

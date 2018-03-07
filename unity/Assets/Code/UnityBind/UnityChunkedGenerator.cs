@@ -13,9 +13,34 @@ using Cursor = Code.UnityBind.Cursor;
 
 namespace Assets.SimpleGenerator
 {
+    [Serializable]
+    public class Project
+    {
+        public TerrainSettings TerrainSettings;
+        public TerrainGrass[] TerrainGrass;
+        public TerrainTexture[] TerrainSplatMaterials;
+
+        public void DownloadTextures()
+        {
+            foreach (var terrainSplatMaterial in TerrainSplatMaterials)
+            {
+                terrainSplatMaterial.DownloadTextures();
+            }
+        }
+    }
+
+    [Serializable]
+    public class TerrainSyncData
+    {
+        public int Index;
+        public string TreeData;
+    }
+    
     [RequireComponent (typeof (Cursor))]
     public class UnityChunkedGenerator : MonoBehaviour
     {
+        public Project Project;
+        public TerrainObject[] TerrainObjects;
         private List<UnityChunk> _chunks;
         public TerrainSettings TerrainSettings;
 
@@ -29,8 +54,10 @@ namespace Assets.SimpleGenerator
         [DllImport("__Internal")]
         private static extern void InitTerrainStorages(int amount);
         
-        public void Refresh()
+        public void Refresh(string project)
         {
+            Project = JsonUtility.FromJson<Project>(project);
+            Project.DownloadTextures();
             if (_chunks != null)
             {
                 foreach (var chunk in _chunks)
@@ -39,29 +66,13 @@ namespace Assets.SimpleGenerator
                 }
             }
 
-            var modifiers = Array.FindAll(
-                gameObject.GetComponents<IModifier<CellImpl>>(),
-                modifier => ((MonoBehaviour) modifier).enabled);
-            var biomes = modifiers.OfType<Biome<CellImpl>>();
-
-            foreach (var modifier in modifiers)
-            {
-                modifier.Start();
-            }
-
-            Core = new CoreImpl(CellInitializer,TerrainSettings.Resolution,
-                modifiers);
-            _chunks = CreateChunks(biomes);
+            _chunks = CreateChunks(Project);
             InitTerrainStorages(_chunks.Count);
             _refreshingChunks = new List<UnityChunk>();
             StartCoroutine(Create());
         }
-
-        private CellImpl CellInitializer(Pair coords)
-        {
-            return new CellImpl(coords) {Core = Core};
-        }
-
+        
+        
         private IEnumerator Create()
         {
             yield return new WaitForFixedUpdate();
@@ -72,15 +83,16 @@ namespace Assets.SimpleGenerator
                 current.Refresh();
             });
         }
+
         public void Update()
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
-                Refresh();
+                Refresh(@"{""EditorJson"":"""",""TerrainGrass"":[],""TerrainSplatMaterials"":[{""AlbedoPath"":""/Users/nesla/Documents/Repos/LandscapeGen/t.png"",""Metallic"":0,""NormalMapPath"":""/Users/nesla/Documents/Repos/LandscapeGen/t.png"",""Offset"":{""x"":0,""y"":0},""Size"":{""x"":0,""y"":0},""Smoothness"":0}]}");
             }
         }
-
-        private List<UnityChunk> CreateChunks(IEnumerable<Biome<CellImpl>> biomes)
+        
+        private List<UnityChunk> CreateChunks(Project project)
         {
             var chunksCount = (ViewDistance * 2 + 1) * (ViewDistance * 2 + 1);
             var chunks = new List<UnityChunk>(chunksCount);
@@ -91,10 +103,16 @@ namespace Assets.SimpleGenerator
                 {
                     var terrain = TerrainSettings.CreateTerrain();
                     terrain.gameObject.transform.parent = transform;
-                    foreach (var biome in biomes)
+                    foreach (var splat in project.TerrainSplatMaterials)
                     {
-                        biome.ApplyPrototypes(terrain);
+                        splat.ApplyTexture(terrain);
                     }
+
+                    foreach (var grass in project.TerrainGrass)
+                    {
+                        grass.ApplyGrass(terrain);
+                    }
+                    
                     var chunk = terrain.gameObject.AddComponent<UnityChunk>();
                     chunk.Parent = this;
                     chunk.Terra = terrain;
@@ -130,9 +148,10 @@ namespace Assets.SimpleGenerator
             }
             _refreshingChunks.Clear();
         }
-        public void OnTerracoreSyncronization(int index)
+        public void OnTerracoreSyncronization(string data)
         {
-            _chunks[index].OnTerracoreSyncronization();
+            var syncData = JsonUtility.FromJson<TerrainSyncData>(data);
+            _chunks[syncData.Index].OnTerracoreSyncronization(syncData.TreeData);
         }
     }
 }

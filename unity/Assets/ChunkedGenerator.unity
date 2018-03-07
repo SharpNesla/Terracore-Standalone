@@ -345,16 +345,6 @@ GameObject:
   - component: {fileID: 1720366770}
   - component: {fileID: 1720366775}
   - component: {fileID: 1720366771}
-  - component: {fileID: 1720366772}
-  - component: {fileID: 1720366774}
-  - component: {fileID: 1720366778}
-  - component: {fileID: 1720366773}
-  - component: {fileID: 1720366776}
-  - component: {fileID: 1720366781}
-  - component: {fileID: 1720366782}
-  - component: {fileID: 1720366777}
-  - component: {fileID: 1720366780}
-  - component: {fileID: 1720366779}
   m_Layer: 0
   m_Name: Pool
   m_TagString: HoldElements
@@ -386,6 +376,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a593ec11bd0804bae86cb25c8f026fbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  a:
+    Albedo: {fileID: 0}
+    AlbedoPath: 
+    NormalMap: {fileID: 0}
+    NormalMapPath: 
+    Metallic: 0
+    Smoothness: 0
+    Specular: {r: 0, g: 0, b: 0, a: 0}
+    Offset: {x: 0, y: 0}
+    Size: {x: 0, y: 0}
+    TerrainIndex: 0
+  TerrainObjects:
+  - Prefab: {fileID: 100000, guid: c91c1eb85782d5748ace27eb4d7415bb, type: 3}
+    BendFactor: 0
+    MinimalTreeScale: 8
+    MaximalTreeScale: 12
+    TerrainIndex: 0
+  - Prefab: {fileID: 100016, guid: 469edab27ab6d004d84af2c4a851bd7f, type: 3}
+    BendFactor: 0
+    MinimalTreeScale: 8
+    MaximalTreeScale: 12
+    TerrainIndex: 0
+  - Prefab: {fileID: 100000, guid: 0c5fa332187126b49a1e9939b653c735, type: 2}
+    BendFactor: 0
+    MinimalTreeScale: 1
+    MaximalTreeScale: 1
+    TerrainIndex: 0
   TerrainSettings:
     Draw: 1
     PixelError: 3
@@ -413,79 +430,6 @@ MonoBehaviour:
     DetailResolutionPerPatch: 8
   CurrentChunkPosition: {x: 0, y: 0}
   ViewDistance: 1
---- !u!114 &1720366772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1720366769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aeaff1d0878b04ab49c7cf04223309ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Frequency: 0.000331005
-  Octaves: 12
-  HillModulatorFrequency: 0.004634072
-  maximumHeight: 0
-  minimumHeight: 1
-  hillHeight: 0.27
-  HillFallOff: 1.5
---- !u!114 &1720366773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1720366769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cab75750b9fb34b2c82b66b4efe262a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TextureColor: {r: 0.13725491, g: 0.5058824, b: 0.15686275, a: 1}
-  TopBound: 0.4318
-  LowBound: 0
-  GrassCount: 38
-  MaxCellElevation: 0.00112
-  SplatTexture:
-    Albedo: {fileID: 2800000, guid: c6e0767b1f8c34890ac245217f4b9731, type: 3}
-    NormalMap: {fileID: 0}
-    Metallic: 0
-    Smoothness: 0
-    Specular: {r: 0, g: 0, b: 0, a: 0}
-    Offset: {x: 0, y: 0}
-    Size: {x: 0.4, y: 0.4}
-    TerrainIndex: 0
-  GrassDetailLayer:
-    PrototypeTexture: {fileID: 2800000, guid: 2c528fec5d95e4ac28cf46399b887662, type: 3}
-    DryColor: {r: 1, g: 1, b: 1, a: 0}
-    HealthyColor: {r: 1, g: 1, b: 1, a: 0}
-    MinimalWidth: 1.2
-    MinimalHeight: 1.5
-    MaximalWidth: 1.2
-    MaximalHeight: 1.7
-    RenderMode: 0
---- !u!114 &1720366774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1720366769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ddad81a84f8e43f88f206f1d60107ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TextureColor: {r: 0.23053633, g: 0.30147058, b: 0.30147058, a: 1}
-  SplatTexture:
-    Albedo: {fileID: 2800000, guid: 62134c566b5a644a892d8e784be69077, type: 3}
-    NormalMap: {fileID: 2800000, guid: e08c295755c0885479ad19f518286ff2, type: 3}
-    Metallic: 0
-    Smoothness: 0.01
-    Specular: {r: 0, g: 0, b: 0, a: 0}
-    Offset: {x: 0, y: 0}
-    Size: {x: 200, y: 200}
-    TerrainIndex: 0
 --- !u!114 &1720366775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,160 +442,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CameraTransform: {fileID: 1485368803}
---- !u!114 &1720366776
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1720366769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e48404c344d14f30ba777c9c0fed4a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TextureColor: {r: 0.10694205, g: 0.33823532, b: 0.2233863, a: 1}
-  TopBound: 0
-  LowBound: 0
-  TreeChance: 90
-  ForestModulatorFrequency: 0.007666666
-  Tree:
-    Prefab: {fileID: 100000, guid: c91c1eb85782d5748ace27eb4d7415bb, type: 3}
-    BendFactor: 0
-    MinimalTreeScale: 8
-    MaximalTreeScale: 12
-    TerrainIndex: 0
---- !u!114 &1720366777
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1720366769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1320bfa9943b45aabfd9f7934c46dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TextureColor: {r: 0.19269033, g: 0.2647059, b: 0.24086626, a: 1}
-  RockChance: 4297
-  Rock:
-    Prefab: {fileID: 100000, guid: 0c5fa332187126b49a1e9939b653c735, type: 2}
-    BendFactor: 0
-    MinimalTreeScale: 1
-    MaximalTreeScale: 1
-    TerrainIndex: 0
---- !u!114 &1720366778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1720366769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6603fa92733854f3c969182f35489c23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TextureColor: {r: 0.86764705, g: 0.86764705, b: 0.86764705, a: 1}
-  TopBound: 1
-  LowBound: 0.55
-  MaxCellElevation: 0.002912
-  SplatTexture:
-    Albedo: {fileID: 2800000, guid: 699adc4ea9af14a7d95559c91b58a352, type: 3}
-    NormalMap: {fileID: 0}
-    Metallic: 0
-    Smoothness: 0
-    Specular: {r: 0, g: 0, b: 0, a: 0}
-    Offset: {x: 0, y: 0}
-    Size: {x: 1, y: 1}
-    TerrainIndex: 0
---- !u!114 &1720366779
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1720366769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eab076c611354e13b379d28c220086eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TextureColor: {r: 0, g: 0.227451, b: 0.38431376, a: 1}
-  GrassCount: 0
-  SplatTexture:
-    Albedo: {fileID: 2800000, guid: f4a3aa0bf7b334183b421ff249fc2282, type: 3}
-    NormalMap: {fileID: 2800000, guid: 6f9275c1bd708da43977cad2663c8f5a, type: 3}
-    Metallic: 0
-    Smoothness: 0.756
-    Specular: {r: 0, g: 0, b: 0, a: 0}
-    Offset: {x: 0, y: 0}
-    Size: {x: 200, y: 200}
-    TerrainIndex: 0
---- !u!114 &1720366780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1720366769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1c03495e7ef949239fe3c7cc3a53aa3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TextureColor: {r: 0.7411765, g: 0.68235296, b: 0.5411765, a: 1}
-  SplatTexture:
-    Albedo: {fileID: 2800000, guid: bfd675cc0db1d4656b75dc6d6ba91142, type: 3}
-    NormalMap: {fileID: 0}
-    Metallic: 0
-    Smoothness: 0.3
-    Specular: {r: 0, g: 0, b: 0, a: 0}
-    Offset: {x: 0, y: 0}
-    Size: {x: 8, y: 8}
-    TerrainIndex: 0
---- !u!114 &1720366781
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1720366769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e8f2581feee4140a2de6f03ed8dd38f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TextureColor: {r: 0.12959558, g: 0.3455882, b: 0.26514956, a: 1}
-  TopBound: 0.52
-  LowBound: 0.4318
-  TreeChance: 130
-  ForestModulatorFrequency: 0.007666666
-  Tree:
-    Prefab: {fileID: 100016, guid: 469edab27ab6d004d84af2c4a851bd7f, type: 3}
-    BendFactor: 0
-    MinimalTreeScale: 8
-    MaximalTreeScale: 12
-    TerrainIndex: 0
---- !u!114 &1720366782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1720366769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f50094feaa82402faecb9bcd91ff4cd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TextureColor: {r: 0.42745098, g: 0.39215687, b: 0.30588236, a: 1}
-  TopBound: 0.52
-  LowBound: 0.4318
-  MaxCellElevation: 0.0007466665
-  SplatTexture:
-    Albedo: {fileID: 2800000, guid: 440eb36db91ca410f800ff3cfe43572f, type: 3}
-    NormalMap: {fileID: 0}
-    Metallic: 0
-    Smoothness: 0
-    Specular: {r: 0, g: 0, b: 0, a: 0}
-    Offset: {x: 0, y: 0}
-    Size: {x: 40, y: 40}
-    TerrainIndex: 0
 --- !u!1 &1727433017
 GameObject:
   m_ObjectHideFlags: 0

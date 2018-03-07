@@ -51,7 +51,7 @@ namespace Assets.SimpleGenerator
                 InitTerrainStorageDetailsMap(Index, i, DetailLayers[i], DetailLayers[i].Length);
             }
         }
-
+        
         public static TerrainStorage FromTerrainData(TerrainData data, int index)
         {
             return new TerrainStorage(data, index);

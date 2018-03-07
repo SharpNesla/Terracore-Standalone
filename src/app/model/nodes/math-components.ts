@@ -1,7 +1,4 @@
-/// <reference path="../../../../node_modules/d3-node-editor/src/index.d.ts"/>
-
 import {numSocket} from "../sockets/sockets";
-import {ConstComponent} from "./producer-components";
 
 class AddComponentProto extends D3NE.Component {
   Title = "Add";
@@ -21,7 +18,6 @@ class AddComponentProto extends D3NE.Component {
 }
 
 class MultiplyComponentProto extends D3NE.Component {
-  Title = "Multiply";
   constructor() {
     super("Multiply", <D3NE.ComponentProps>{
       builder(node: D3NE.Node) {

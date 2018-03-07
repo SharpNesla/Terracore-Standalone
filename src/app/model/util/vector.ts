@@ -4,6 +4,6 @@ export class Vector3 {
 }
 
 export class Vector2 {
-  constructor(public X: number, public Y: number) {
+  constructor(public x: number, public y: number) {
   }
 }
