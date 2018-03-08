@@ -58,6 +58,7 @@ namespace Assets.SimpleGenerator
         {
             Project = JsonUtility.FromJson<Project>(project);
             Project.DownloadTextures();
+            Debug.Log("Textures Downloaded!");
             if (_chunks != null)
             {
                 foreach (var chunk in _chunks)
@@ -103,7 +104,7 @@ namespace Assets.SimpleGenerator
                 {
                     var terrain = TerrainSettings.CreateTerrain();
                     terrain.gameObject.transform.parent = transform;
-                    foreach (var splat in project.TerrainSplatMaterials)
+                    /*foreach (var splat in project.TerrainSplatMaterials)
                     {
                         splat.ApplyTexture(terrain);
                     }
@@ -112,7 +113,7 @@ namespace Assets.SimpleGenerator
                     {
                         grass.ApplyGrass(terrain);
                     }
-                    
+                    */
                     var chunk = terrain.gameObject.AddComponent<UnityChunk>();
                     chunk.Parent = this;
                     chunk.Terra = terrain;

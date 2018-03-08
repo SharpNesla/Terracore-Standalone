@@ -47,7 +47,7 @@ class NoiseComponentProto extends D3NE.Component {
         return node.addOutput(out)
       },
       worker(node, inputs, outputs, storage, xPos, yPos, xLocalPos, yLocalPos, resolution) {
-        outputs[0] = this.noise.getValue(xPos , yPos, 0) / 10;
+        outputs[0] = this.noise.getValue(xPos,0 , yPos) / 6;
       }
     })
   }

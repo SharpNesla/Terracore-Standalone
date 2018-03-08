@@ -29,8 +29,8 @@ namespace Assets.SimpleGenerator
 
         public void Refresh()
         {
-            ExecuteTerracoreAsyncCode(Index ,Position.X * Parent.TerrainSettings.Resolution
-                ,Position.Y * Parent.TerrainSettings.Resolution, Parent.TerrainSettings.Resolution);
+            var coordinates = new Pair(Position.X * Parent.TerrainSettings.Resolution, Position.Y * Parent.TerrainSettings.Resolution);
+            ExecuteTerracoreAsyncCode(Index , coordinates.X, coordinates.Y, Parent.TerrainSettings.Resolution);
         }
 
         public void OnTerracoreSyncronization(string treePositions)

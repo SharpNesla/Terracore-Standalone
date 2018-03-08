@@ -23,16 +23,16 @@ export class ExecutorService {
     for (let y = 0; y <= resolution; y++) {
       for (let x = 0; x <= resolution; x++) {
         this.engine.process(this.heightMapSource, null, TerrainStorages[index],
-          x + xPos * resolution, y + yPos * resolution, x, y, resolution);
+          x + xPos, y + yPos, x, y, resolution);
       }
     }
 
-    for (let y = 0; y <= resolution; y++) {
+    /*for (let y = 0; y <= resolution; y++) {
       for (let x = 0; x <= resolution; x++) {
         //storage.SplatMap[current.LocalPosition.X, current.LocalPosition.Y, 0] = 0f;
         TerrainStorages[index]
       }
-    }
+    }*/
     /*
     for (let y = 0; y <= resolution; y++) {
       for (let x = 0; x <= resolution; x++) {
