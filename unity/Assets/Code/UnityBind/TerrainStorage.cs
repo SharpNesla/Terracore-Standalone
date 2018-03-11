@@ -14,7 +14,7 @@ namespace Assets.SimpleGenerator
         public float[,] Heights;
         public float[,,] SplatMap;
         public int [][,] DetailLayers;
-        public List<TreeInstance> Instances;
+        public TreeInstance[] Instances;
         public int Index;
         
         [DllImport("__Internal")]
@@ -41,8 +41,6 @@ namespace Assets.SimpleGenerator
 
             Index = index;
             
-            Instances = new List<TreeInstance>();
-            
             InitTerrainStorage(Index, Heights, Heights.Length,
                 SplatMap, SplatMap.Length, DetailLayers.Length);
 
@@ -59,7 +57,6 @@ namespace Assets.SimpleGenerator
 
         public void Reset(Pair size, Pair position)
         {
-            Instances.Clear();
             for (var y = 0; y < size.X; y++)
             {
                 for (var x = 0; x < size.X; x++)
@@ -126,7 +123,7 @@ namespace Assets.SimpleGenerator
             {
                 data.SetDetailLayer(0, 0, i , storage.DetailLayers[i]);
             }
-            data.treeInstances = storage.Instances.ToArray();
+            data.treeInstances = storage.Instances;
         }
     }
 }

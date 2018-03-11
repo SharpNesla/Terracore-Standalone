@@ -10,7 +10,10 @@ mergeInto(LibraryManager.library, {
     TerrainStorages[index] = {
       Heights: new Float32Array(buffer, heights, heightsLength),
       SplatMaps: new Float32Array(buffer, splatmaps, splatmapsLength),
-      DetailLayers: new Array(detailPrototypesCount)
+      DetailLayers: new Array(detailPrototypesCount),
+      TreeInstances: {
+        Instances: []
+      }
     }
   },
   InitTerrainStorageDetailsMap: function (index, detailLayerId, layer, layerLength) {

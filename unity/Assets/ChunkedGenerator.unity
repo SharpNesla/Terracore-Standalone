@@ -376,17 +376,106 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a593ec11bd0804bae86cb25c8f026fbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  a:
-    Albedo: {fileID: 0}
-    AlbedoPath: 
-    NormalMap: {fileID: 0}
-    NormalMapPath: 
-    Metallic: 0
-    Smoothness: 0
-    Specular: {r: 0, g: 0, b: 0, a: 0}
-    Offset: {x: 0, y: 0}
-    Size: {x: 0, y: 0}
-    TerrainIndex: 0
+  PrebuiltProject:
+    TerrainSettings:
+      IsInifinite: 1
+      ViewDistance: 2
+      Resolution: 256
+    TerrainGrass:
+    - PrototypeTexture: {fileID: 2800000, guid: 2c528fec5d95e4ac28cf46399b887662,
+        type: 3}
+      DryColor: {r: 1, g: 1, b: 1, a: 0}
+      HealthyColor: {r: 1, g: 1, b: 1, a: 0}
+      MinimalWidth: 1.2
+      MinimalHeight: 1.5
+      MaximalWidth: 1.5
+      MaximalHeight: 1.7
+      RenderMode: 0
+    TerrainObjects:
+    - Prefab: {fileID: 100000, guid: c91c1eb85782d5748ace27eb4d7415bb, type: 3}
+      BendFactor: 0
+      MinimalTreeScale: 8
+      MaximalTreeScale: 12
+      TerrainIndex: 0
+    - Prefab: {fileID: 100016, guid: 469edab27ab6d004d84af2c4a851bd7f, type: 3}
+      BendFactor: 0
+      MinimalTreeScale: 8
+      MaximalTreeScale: 12
+      TerrainIndex: 0
+    - Prefab: {fileID: 100000, guid: 0c5fa332187126b49a1e9939b653c735, type: 2}
+      BendFactor: 0
+      MinimalTreeScale: 1
+      MaximalTreeScale: 1
+      TerrainIndex: 0
+    TerrainSplatMaterials:
+    - Albedo: {fileID: 2800000, guid: 62134c566b5a644a892d8e784be69077, type: 3}
+      AlbedoPath: 
+      NormalMap: {fileID: 2800000, guid: e08c295755c0885479ad19f518286ff2, type: 3}
+      NormalMapPath: 
+      Metallic: 0
+      Smoothness: 0.01
+      Specular: {r: 0, g: 0, b: 0, a: 0}
+      Offset: {x: 0, y: 0}
+      Size: {x: 200, y: 200}
+      TerrainIndex: 0
+    - Albedo: {fileID: 2800000, guid: 699adc4ea9af14a7d95559c91b58a352, type: 3}
+      AlbedoPath: 
+      NormalMap: {fileID: 0}
+      NormalMapPath: 
+      Metallic: 0
+      Smoothness: 0
+      Specular: {r: 0, g: 0, b: 0, a: 0}
+      Offset: {x: 0, y: 0}
+      Size: {x: 1, y: 1}
+      TerrainIndex: 0
+    - Albedo: {fileID: 2800000, guid: c6e0767b1f8c34890ac245217f4b9731, type: 3}
+      AlbedoPath: 
+      NormalMap: {fileID: 0}
+      NormalMapPath: 
+      Metallic: 0
+      Smoothness: 0
+      Specular: {r: 0, g: 0, b: 0, a: 0}
+      Offset: {x: 0, y: 0}
+      Size: {x: 0.4, y: 0.4}
+      TerrainIndex: 0
+    - Albedo: {fileID: 2800000, guid: 440eb36db91ca410f800ff3cfe43572f, type: 3}
+      AlbedoPath: 
+      NormalMap: {fileID: 0}
+      NormalMapPath: 
+      Metallic: 0
+      Smoothness: 0
+      Specular: {r: 0, g: 0, b: 0, a: 0}
+      Offset: {x: 0, y: 0}
+      Size: {x: 40, y: 40}
+      TerrainIndex: 0
+    - Albedo: {fileID: 2800000, guid: bfd675cc0db1d4656b75dc6d6ba91142, type: 3}
+      AlbedoPath: 
+      NormalMap: {fileID: 0}
+      NormalMapPath: 
+      Metallic: 0
+      Smoothness: 0.3
+      Specular: {r: 0, g: 0, b: 0, a: 0}
+      Offset: {x: 0, y: 0}
+      Size: {x: 8, y: 8}
+      TerrainIndex: 0
+    - Albedo: {fileID: 2800000, guid: f4a3aa0bf7b334183b421ff249fc2282, type: 3}
+      AlbedoPath: 
+      NormalMap: {fileID: 2800000, guid: 6f9275c1bd708da43977cad2663c8f5a, type: 3}
+      NormalMapPath: 
+      Metallic: 0
+      Smoothness: 0.765
+      Specular: {r: 0, g: 0, b: 0, a: 0}
+      Offset: {x: 0, y: 0}
+      Size: {x: 200, y: 200}
+      TerrainIndex: 0
+  Project:
+    TerrainSettings:
+      IsInifinite: 0
+      ViewDistance: 0
+      Resolution: 0
+    TerrainGrass: []
+    TerrainObjects: []
+    TerrainSplatMaterials: []
   TerrainObjects:
   - Prefab: {fileID: 100000, guid: c91c1eb85782d5748ace27eb4d7415bb, type: 3}
     BendFactor: 0
@@ -404,30 +493,9 @@ MonoBehaviour:
     MaximalTreeScale: 1
     TerrainIndex: 0
   TerrainSettings:
-    Draw: 1
-    PixelError: 3
-    FirstpassMaterialDistance: 2000
-    CastShadows: 1
-    MaterialType: 0
-    IsHiddenMaterialProp: 0
-    Material: {fileID: 0}
-    ReflectionProbeUsage: 0
-    Thickness: 0
-    DrawTrees: 1
-    BakeLightProbesForTrees: 0
-    DetailDistance: 250
-    DetailDensity: 1
-    TreeDistance: 2000
-    BillboardStart: 500
-    FadeLength: 5
-    MaxTreeMeshes: 50
-    Speed: 0.5
-    Size: 0.5
-    Bending: 0.152
-    GrassTint: {r: 0.7882353, g: 0.7882353, b: 0.7882353, a: 0}
-    TerrainScale: {x: 1000, y: 2500, z: 1000}
+    IsInifinite: 1
+    ViewDistance: 2
     Resolution: 256
-    DetailResolutionPerPatch: 8
   CurrentChunkPosition: {x: 0, y: 0}
   ViewDistance: 1
 --- !u!114 &1720366775

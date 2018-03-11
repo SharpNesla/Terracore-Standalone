@@ -8,7 +8,7 @@ import {DataService} from "../model/data.service";
   selector: 'app-main-view',
   template: `
     <mat-drawer-container class="example-container">
-      <mat-drawer class="mat-elevation-z4" mode="side" opened="true">
+      <mat-drawer class="mat-elevation-z4" mode="side" disableClose="true" opened="true">
         <app-editor-unity>
         </app-editor-unity>
         <mat-accordion>
@@ -34,15 +34,13 @@ import {DataService} from "../model/data.service";
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Node Settings
+                Export Settings
               </mat-panel-title>
               <mat-panel-description>
                 Details of selected node
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <div *ngFor="let i of this.nodeEditor.SelectedNodeKeys">
-              {{i}}: {{this.nodeEditor.Selected.data[i]}}
-            </div>
+            
           </mat-expansion-panel>
         </mat-accordion>
       </mat-drawer>
@@ -123,6 +121,9 @@ export class MainViewComponent {
   AllComponents = AllComponents;
   constructor(public nodeEditor: NodeEditorService, public data: DataService) {
 
+  }
+  getTypeOf(type){
+    return typeof type;
   }
 }
 

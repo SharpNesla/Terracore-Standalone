@@ -7,6 +7,7 @@ using Assets.SimpleGenerator.TerrainModules;
 using Code.Core;
 using Code.Modifiers.Biomes;
 using Code.Util;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Networking;
 using Cursor = Code.UnityBind.Cursor;
@@ -18,6 +19,7 @@ namespace Assets.SimpleGenerator
     {
         public TerrainSettings TerrainSettings;
         public TerrainGrass[] TerrainGrass;
+        public TerrainObject[] TerrainObjects;
         public TerrainTexture[] TerrainSplatMaterials;
 
         public void DownloadTextures()
@@ -30,17 +32,43 @@ namespace Assets.SimpleGenerator
     }
 
     [Serializable]
-    public class TerrainSyncData
+    public struct TerrainSyncData
     {
         public int Index;
-        public string TreeData;
+        public TreeInstanc[] Instances;
+
+        public TreeInstance[] TreeInstances
+        {
+            get
+            {
+                return Instances.Select(x => new TreeInstance
+                    {
+                        position = x.Position,
+                        widthScale = x.Scale,
+                        heightScale = x.Scale,
+                        rotation = x.Rotation,
+                        prototypeIndex = x.PrototypeIndex
+                    })
+                    .ToArray();
+            }
+        }
     }
-    
-    [RequireComponent (typeof (Cursor))]
+
+    [Serializable]
+    public struct TreeInstanc
+    {
+        public Vector3 Position;
+        public int Scale;
+        public float Rotation;
+        public int PrototypeIndex;
+    }
+
+    [RequireComponent(typeof(Cursor))]
     public class UnityChunkedGenerator : MonoBehaviour
     {
+        public Project PrebuiltProject;
         public Project Project;
-        public TerrainObject[] TerrainObjects;
+        public List<TerrainObject> TerrainObjects;
         private List<UnityChunk> _chunks;
         public TerrainSettings TerrainSettings;
 
@@ -50,15 +78,14 @@ namespace Assets.SimpleGenerator
 
         public CoreImpl Core;
         private List<UnityChunk> _refreshingChunks;
-        
+
         [DllImport("__Internal")]
         private static extern void InitTerrainStorages(int amount);
-        
+
         public void Refresh(string project)
         {
             Project = JsonUtility.FromJson<Project>(project);
-            Project.DownloadTextures();
-            Debug.Log("Textures Downloaded!");
+
             if (_chunks != null)
             {
                 foreach (var chunk in _chunks)
@@ -72,12 +99,11 @@ namespace Assets.SimpleGenerator
             _refreshingChunks = new List<UnityChunk>();
             StartCoroutine(Create());
         }
-        
-        
+
         private IEnumerator Create()
         {
             yield return new WaitForFixedUpdate();
-            CoreUtils.Foreach(new Pair(ViewDistance * 2 + 1,ViewDistance * 2 + 1), position =>
+            CoreUtils.Foreach(new Pair(ViewDistance * 2 + 1, ViewDistance * 2 + 1), position =>
             {
                 var current = _chunks[position.Y * (ViewDistance * 2 + 1) + position.X];
                 current.Position = position + new Pair(-ViewDistance, -ViewDistance) + CurrentChunkPosition;
@@ -85,14 +111,6 @@ namespace Assets.SimpleGenerator
             });
         }
 
-        public void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                Refresh(@"{""EditorJson"":"""",""TerrainGrass"":[],""TerrainSplatMaterials"":[{""AlbedoPath"":""/Users/nesla/Documents/Repos/LandscapeGen/t.png"",""Metallic"":0,""NormalMapPath"":""/Users/nesla/Documents/Repos/LandscapeGen/t.png"",""Offset"":{""x"":0,""y"":0},""Size"":{""x"":0,""y"":0},""Smoothness"":0}]}");
-            }
-        }
-        
         private List<UnityChunk> CreateChunks(Project project)
         {
             var chunksCount = (ViewDistance * 2 + 1) * (ViewDistance * 2 + 1);
@@ -104,16 +122,22 @@ namespace Assets.SimpleGenerator
                 {
                     var terrain = TerrainSettings.CreateTerrain();
                     terrain.gameObject.transform.parent = transform;
-                    /*foreach (var splat in project.TerrainSplatMaterials)
+
+                    foreach (var splat in PrebuiltProject.TerrainSplatMaterials)
                     {
                         splat.ApplyTexture(terrain);
                     }
 
-                    foreach (var grass in project.TerrainGrass)
+                    foreach (var grass in PrebuiltProject.TerrainGrass)
                     {
                         grass.ApplyGrass(terrain);
                     }
-                    */
+
+                    foreach (var terrainObject in PrebuiltProject.TerrainObjects)
+                    {
+                        terrainObject.ApplyTree(terrain);
+                    }
+
                     var chunk = terrain.gameObject.AddComponent<UnityChunk>();
                     chunk.Parent = this;
                     chunk.Terra = terrain;
@@ -122,6 +146,7 @@ namespace Assets.SimpleGenerator
                     chunks.Add(chunk);
                 }
             }
+
             return chunks;
         }
 
@@ -129,7 +154,7 @@ namespace Assets.SimpleGenerator
         {
             _refreshingChunks.AddRange(_chunks);
             var positions = new List<Pair>();
-            CoreUtils.Foreach(new Pair(ViewDistance * 2 + 1,ViewDistance * 2 + 1), localPosition =>
+            CoreUtils.Foreach(new Pair(ViewDistance * 2 + 1, ViewDistance * 2 + 1), localPosition =>
             {
                 var position = localPosition + new Pair(-ViewDistance, -ViewDistance) + CurrentChunkPosition;
                 var current = _refreshingChunks.Find(x => x.Position == position);
@@ -147,12 +172,14 @@ namespace Assets.SimpleGenerator
                 _refreshingChunks[i].Position = positions[i];
                 _refreshingChunks[i].Refresh();
             }
+
             _refreshingChunks.Clear();
         }
+
         public void OnTerracoreSyncronization(string data)
         {
             var syncData = JsonUtility.FromJson<TerrainSyncData>(data);
-            _chunks[syncData.Index].OnTerracoreSyncronization(syncData.TreeData);
+            _chunks[syncData.Index].OnTerracoreSyncronization(syncData.TreeInstances);
         }
     }
 }

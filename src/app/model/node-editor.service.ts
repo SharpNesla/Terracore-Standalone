@@ -1,10 +1,9 @@
-import {ComponentFactoryResolver, ElementRef, Injectable} from "@angular/core";
+import { ElementRef, Injectable} from "@angular/core";
 import {ConstComponent} from "./nodes/producer-components";
 import {AddComponent} from "./nodes/math-components";
 import {UnityService} from "./unity.service";
-import {AllComponents, AllComponentsFlat} from "./nodes/components";
+import {AllComponentsFlat} from "./nodes/components";
 import {ExecutorService} from "./executor.service";
-import {numSocket} from "./sockets/sockets";
 import {DataService} from "./data.service";
 import {ElectronService} from "ngx-electron";
 import {Engine} from "./util/engine";
@@ -40,9 +39,8 @@ export class NodeEditorService {
     this.Editor = new D3NE.NodeEditor('terracore@0.0.0', this.container.nativeElement,
       AllComponentsFlat, menu);
 
-    this.Editor.eventListener.on('nodecreate', (node?: D3NE.Node, persistent?: boolean) => {
+    this.Editor.eventListener.on('nodeselect', (node?: D3NE.Node, persistent?: boolean) => {
       this.Selected = node;
-      console.log(this.SelectedNodeKeys);
       return true;
     });
 
@@ -72,9 +70,9 @@ export class NodeEditorService {
     this.Editor.addNode(node);
   }
 
-  compile() {
+  async compile() {
+    await this.parallel.compile(this.Editor);
     this.UnityService.compile(this.dataService.UnityProjectJson);
-    this.parallel.compile(this.Editor);
   }
 
   close() {

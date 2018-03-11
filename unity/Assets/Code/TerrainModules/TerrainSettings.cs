@@ -8,7 +8,8 @@ namespace Assets.SimpleGenerator.TerrainModules
     [Serializable]
     public class TerrainSettings
     {
-
+        public bool IsInifinite;
+        public int ViewDistance;
         public Vector3 TerrainScale
         {
             get
@@ -28,7 +29,7 @@ namespace Assets.SimpleGenerator.TerrainModules
             terrain.castShadows = true;
             terrain.heightmapPixelError = 3;
             terrain.detailObjectDensity = 1;
-            terrain.detailObjectDistance = 50;
+            terrain.detailObjectDistance = 250;
             terrain.reflectionProbeUsage = ReflectionProbeUsage.Off;
             terrain.treeBillboardDistance = 500;
             terrain.treeDistance = 2000;

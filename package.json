@@ -8,7 +8,7 @@
     "start": "electron .",
     "build": "ng build --prod --aot",
     "devbuild": "ng build dist",
-    "watch": "ng build dist --aot -w --delete-output-path=false & TS_NODE_PROJECT=\"electron/tsconfig.json\" webpack --config='./electron/config.js' --watch"
+    "watch": "rm -rf ./dist;ng build dist --aot -w --delete-output-path=false & TS_NODE_PROJECT=\"electron/tsconfig.json\" webpack --config='./electron/config.js' --watch"
   },
   "private": true,
   "dependencies": {},

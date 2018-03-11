@@ -23,7 +23,7 @@ namespace Code.Modifiers.Biomes
 
         public override void Apply(CellImpl current, TerrainStorage storage)
         {
-            storage.Instances.Add(MakeRock(current, current.Core.Resolution));
+            //storage.Instances.Add(MakeRock(current, current.Core.Resolution));
         }
 
         private TreeInstance MakeRock(CellImpl current, int localScale)

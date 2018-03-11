@@ -1,7 +1,6 @@
 import {EventEmitter, Injectable} from "@angular/core";
 import {Vector2} from "./util/vector";
 import {ElectronService, NgxElectronModule} from "ngx-electron";
-import * as fs from "fs-extra";
 import * as PATH from "path";
 
 export class TerrainGrass {
@@ -28,11 +27,12 @@ export class TerrainSplatMaterial {
 export class TerrainSettings {
   constructor(public IsInifinite = true,
               public ViewDistance = 2,
-              public Resolution = 256){}
+              public Resolution = 256) {
+  }
 }
 
 export class Data {
-  TerrainSettings : TerrainSettings = new TerrainSettings();
+  TerrainSettings: TerrainSettings = new TerrainSettings();
   TerrainSplatMaterials: TerrainSplatMaterial[] = [];
   TerrainGrass: TerrainGrass[] = [];
   EditorJson: string = '';
@@ -42,12 +42,11 @@ export class Data {
 export class DataService {
   public CurrentProjectPath = '';
   private static Data: Data;
-
   get SplatMaterials(): TerrainSplatMaterial[] {
     return DataService.Data.TerrainSplatMaterials;
   }
 
-  get TerrainSettings(){
+  get TerrainSettings() {
     return DataService.Data.TerrainSettings;
   }
 
@@ -55,24 +54,8 @@ export class DataService {
     return DataService.Data.TerrainGrass;
   }
 
-  get UnityProjectJson(){
-    const editorJson = DataService.Data.EditorJson;
-    DataService.Data.EditorJson = '';
-
-    for (let [index, value] of DataService.Data.TerrainSplatMaterials.entries()) {
-      value.AlbedoPath = PATH.resolve(this.CurrentProjectPath, `Splat${index}.png`);
-      value.NormalMapPath = PATH.resolve(this.CurrentProjectPath, `NormalMap${index}.png`);
-    }
-
-    const json = JSON.stringify(DataService.Data);
-
-    for (let [index, value] of DataService.Data.TerrainSplatMaterials.entries()) {
-      value.AlbedoPath = `Splat${index}.png`;
-      value.NormalMapPath = `NormalMap${index}.png`;
-    }
-
-    DataService.Data.EditorJson = editorJson
-    return json;
+  get UnityProjectJson() {
+    return JSON.stringify(DataService.Data);
   }
 
   get EditorJson(): string {
@@ -83,7 +66,7 @@ export class DataService {
     DataService.Data.EditorJson = value;
   }
 
-  DataLoaded : EventEmitter<Data> = new EventEmitter<Data>();
+  DataLoaded: EventEmitter<Data> = new EventEmitter<Data>();
 
   constructor(private electronService: ElectronService) {
     this.createNewData();
@@ -104,7 +87,19 @@ export class DataService {
   }
 
   createNewData() {
-    DataService.Data = new Data();
+    const DataMock: Data = <Data>{
+      TerrainSettings: new TerrainSettings(),
+      TerrainGrass: [],
+      TerrainSplatMaterials: [
+        new TerrainSplatMaterial('assets/Albedo0.jpg', 'assets/Normal0.png', 0, 0.01),
+        new TerrainSplatMaterial('assets/Albedo1.jpg', '', ),
+        new TerrainSplatMaterial('assets/Albedo2.psd'),
+        new TerrainSplatMaterial('assets/Albedo3.psd'),
+        new TerrainSplatMaterial('assets/Albedo4.psd'),
+        new TerrainSplatMaterial('assets/Albedo5.png', 'assets/Normal5.png')
+      ]
+    };
+    DataService.Data = DataMock;
   }
 
   saveData() {

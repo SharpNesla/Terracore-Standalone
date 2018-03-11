@@ -51,12 +51,12 @@ ipcMain.on('saveData', (event, data: Data) => {
     if (x != undefined) {
       await fs.emptyDir(x);
       try {
-        for (let [index, value] of data.TerrainSplatMaterials.entries()) {
+        /*for (let [index, value] of data.TerrainSplatMaterials.entries()) {
           await fs.copy(value.AlbedoPath, path.resolve(x, `Splat${index}.png`));
           await fs.copy(value.NormalMapPath, path.resolve(x, `NormalMap${index}.png`))
           value.AlbedoPath = `Splat${index}.png`;
           value.NormalMapPath = `NormalMap${index}.png`;
-        }
+        }*/
         await fs.writeFile(path.resolve(x, `project.json`), JSON.stringify(data));
       } catch (err) {}
       mainWindow.webContents.send("onSaveData", x)

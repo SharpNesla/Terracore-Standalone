@@ -39,7 +39,7 @@ namespace Code.Modifiers.Biomes
 
         public override void Apply(CellImpl current, TerrainStorage storage)
         {
-            storage.Instances.Add(MakeTree(current, current.Core.Resolution));
+//            storage.Instances.Add(MakeTree(current, current.Core.Resolution));
         }
 
         private TreeInstance MakeTree(CellImpl current, int localScale)
